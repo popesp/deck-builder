@@ -1,0 +1,64 @@
+<template name="cards">
+	<h1>Card Database</h1>
+	
+	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filter Options</a>
+	<div class="collapse" id="collapseExample">
+		<div class="filters">
+			<div class="class-filters">
+				<h2>Class</h2>
+				<span class="class-filter-check"><input type="checkbox" class="filter-hunter" checked="{{filter_hunter_check}}"> Hunter</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-mage" checked="{{filter_mage_check}}"> Mage</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-druid" checked="{{filter_druid_check}}"> Druid</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-priest" checked="{{filter_priest_check}}"> Priest</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-warlock" checked="{{filter_warlock_check}}"> Warlock</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-paladin" checked="{{filter_paladin_check}}"> Paladin</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-rogue" checked="{{filter_rogue_check}}"> Rogue</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-shaman" checked="{{filter_shaman_check}}"> Shaman</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-warrior" checked="{{filter_warrior_check}}"> Warrior</span>
+				<span class="class-filter-check"><input type="checkbox" class="filter-neutral" checked="{{filter_neutral_check}}"> Neutral</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<ul class="pagination">
+			{{#each page}}
+				{{> card_page}}
+			{{/each}}
+		</ul>
+	</div>
+	
+	<div class="container">
+		<span class="align-right">Displaying {{cardCount}}</span>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			{{#each card}}
+				{{> card_display}}
+			{{/each}}
+		</div>
+	</div>
+	
+	<ul class="pagination">
+		{{#each page}}
+			{{> card_page}}
+		{{/each}}
+	</ul>
+</template>
+
+<template name="card_display">
+	<div class="col-md-3">
+		<div class="card">
+			<h3>{{name}}</h3>
+			
+			<p>{{{text}}}</p>
+			<p>Cost: {{cost}}</p>
+			<p>Set: {{set}}</p>
+		</div>
+	</div>
+</template>
+
+<template name="card_page">
+	<li><a class="page-btn-{{num}}" href="#">{{num}}</a></li>
+</template>
