@@ -5,10 +5,15 @@ Template.cards.onCreated(function()
 	this.card_count = new ReactiveVar(0);
 	this.card_skip = new ReactiveVar(0);
 	this.card_limit = new ReactiveVar(CARDPAGE_LIMIT);
+	this.card_class = new ReactiveVar('Warlock');
+	// this.card_classes = new ReactiveDict();
 });
 
 Template.cards.helpers
 ({
+	anotherCard: function () {
+		return Cards.find({playerClass: Template.instance().card_class.get(), collectible: true}, {sort: {name: 1}});
+	},
 	card: function()
 	{
 		var class_array = Classes.find({}).fetch();
@@ -121,6 +126,7 @@ Template.cards.events
 ({
 	"change .filter-hunter": function (event)
 	{
+		Template.instance().card_class.set('Hunter');
 		Session.set("filter_hunter", event.target.checked);
 		console.log(Session.get("filter_hunter"));
 	},
