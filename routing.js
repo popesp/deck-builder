@@ -48,6 +48,23 @@ Router.route('/cards',
 	}
 );
 
+// Individual card
+Router.route('/card/:id',
+	{
+		name: 'card',
+		action: function()
+		{
+			this.render("card",
+			{
+				data: function()
+				{
+					return Cards.findOne({_id: this.params.id});
+				}
+			});
+		}
+	}
+);
+
 // User Profiles
 Router.route('/user/:id',
 	{

@@ -11,6 +11,8 @@ accountsUIBootstrap3.logoutCallback = function(error) {
 }
 
 Meteor.subscribe("cards");
+Meteor.subscribe("sets");
+Meteor.subscribe("rarities");
 Meteor.subscribe("classes", function()
 {
 	var class_array = Classes.find({}).fetch();
@@ -18,8 +20,6 @@ Meteor.subscribe("classes", function()
 	
 	for (i in class_array)
 	{
-		console.log('test');
-		
 		var name = class_array[i].name.toLowerCase();
 		
 		// set session variables for class filters

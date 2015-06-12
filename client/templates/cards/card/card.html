@@ -1,0 +1,16 @@
+<template name="card">
+	<h1>Card name: {{name}}</h1>
+	
+	<span style="font-size: 18px">Rating: {{rating}}</span>
+	<br>
+	This card has been rated {{rate_count}} times.
+	<br>
+	
+	{{#each ratings}}
+		{{> card_rating_btn}}
+	{{/each}}
+</template>
+
+<template name="card_rating_btn">
+	<div class="btn btn-primary card-rate-btn">{{this}}</div>
+</template>

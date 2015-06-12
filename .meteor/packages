@@ -16,3 +16,4 @@ reactive-var
 alethes:pages
 msavin:mongol
 reactive-dict
+manuel:reactivearray

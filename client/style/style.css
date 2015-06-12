@@ -32,7 +32,19 @@ ul.nav > li:last-child
 	display: inline-block;
 }
 
-.filters
+.card-mana
+{
+	display: block;
+	float: right;
+	padding: 2px 10px;
+	color: #f0f0f0;
+	background-color: #3040a0;
+	font-weight: bold;
+	font-size: 18px;
+	border-radius: 5px;
+}
+
+.card-filters
 {
 	border-radius: 10px;
 	
@@ -43,8 +55,13 @@ ul.nav > li:last-child
 	background-color: gold;
 }
 
-.class-filter-check
+.card-filters-class-check
 {
 	margin: 20px!important;
-	color: red;
+}
+
+.card-rate-btn
+{
+	background-color: #e0e020;
+	color: #202020;
 }
