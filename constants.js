@@ -1,0 +1,1 @@
+CARDPAGE_LIMIT = 32;

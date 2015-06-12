@@ -1,19 +1,26 @@
-Session.setDefault("filter_neutral", true);
-
 Template.cards.onCreated(function()
 {
 	this.card_count = new ReactiveVar(0);
+	
 	this.card_skip = new ReactiveVar(0);
 	this.card_limit = new ReactiveVar(CARDPAGE_LIMIT);
-	this.card_class = new ReactiveVar('Warlock');
-	// this.card_classes = new ReactiveDict();
+	
+	this.filters = new ReactiveVar(new Array());
+	
 });
 
 Template.cards.helpers
 ({
-	anotherCard: function () {
-		return Cards.find({playerClass: Template.instance().card_class.get(), collectible: true}, {sort: {name: 1}});
+	classes: function()
+	{
+		var cursor = Classes.find({}).fetch();
+		
+		for (var i in cursor)
+			Template.instance().filters[cursor[i].name] = false;
+		
+		return cursor;
 	},
+	
 	card: function()
 	{
 		var class_array = Classes.find({}).fetch();
@@ -119,6 +126,22 @@ Template.cards.helpers
 	filter_neutral_check: function()
 	{
 		return Session.get("filter_neutral");
+	}
+});
+
+Template.card_filter_class.helpers
+({
+	checked: function()
+	{
+		return false;
+	}
+});
+
+Template.card_filter_class.events
+({
+	"change .card_filter_check": function (event)
+	{
+		
 	}
 });
 

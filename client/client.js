@@ -1,5 +1,3 @@
-CARDPAGE_LIMIT = 32;
-
 Accounts.ui.config
 ({
 	passwordSignupFields: "USERNAME_ONLY"

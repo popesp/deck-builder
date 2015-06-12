@@ -3,34 +3,27 @@
 	
 	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filter Options</a>
 	<div class="collapse" id="collapseExample">
-		<div class="filters">
-			<div class="class-filters">
+		<div class="card-filters">
+			<div class="card-filters-class">
 				<h2>Class</h2>
-				<span class="class-filter-check"><input type="checkbox" class="filter-hunter" checked="{{filter_hunter_check}}"> Hunter</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-mage" checked="{{filter_mage_check}}"> Mage</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-druid" checked="{{filter_druid_check}}"> Druid</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-priest" checked="{{filter_priest_check}}"> Priest</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-warlock" checked="{{filter_warlock_check}}"> Warlock</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-paladin" checked="{{filter_paladin_check}}"> Paladin</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-rogue" checked="{{filter_rogue_check}}"> Rogue</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-shaman" checked="{{filter_shaman_check}}"> Shaman</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-warrior" checked="{{filter_warrior_check}}"> Warrior</span>
-				<span class="class-filter-check"><input type="checkbox" class="filter-neutral" checked="{{filter_neutral_check}}"> Neutral</span>
+				{{#each classes}}
+					{{> card_filter_class}}
+				{{/each}}
 			</div>
 		</div>
 	</div>
 	
-	<div class="container">
-		<ul class="pagination">
-			{{#each page}}
-				{{> card_page}}
-			{{/each}}
-		</ul>
-	</div>
+	<br>
 	
-	<div class="container">
-		<span class="align-right">Displaying {{cardCount}}</span>
-	</div>
+	<ul class="pagination">
+		{{#each page}}
+			{{> card_page}}
+		{{/each}}
+	</ul>
+	
+	<br>
+	
+	<span class="align-right">Displaying {{cardCount}}</span>
 	
 	<div class="container">
 		<div class="row">
@@ -45,6 +38,10 @@
 			{{> card_page}}
 		{{/each}}
 	</ul>
+</template>
+
+<template name="card_filter_class">
+	<span class="card-filter-check"><input type="checkbox" checked="{{checked}}"> {{name}}</span>
 </template>
 
 <template name="card_display">

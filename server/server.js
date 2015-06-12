@@ -29,13 +29,3 @@ Meteor.startup(function ()
 	Classes.insert({name: "Warlock"});
 	Classes.insert({name: "Warrior"});
 });
-
-Meteor.publish('cards', function()
-{
-	return Cards.find({});
-});
-
-Meteor.publish('classes', function()
-{
-	return Classes.find({});
-});
