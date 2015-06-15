@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-insecure
 twbs:bootstrap
 iron:router
 ian:accounts-ui-bootstrap-3
@@ -13,7 +12,4 @@ accounts-password
 fortawesome:fontawesome
 aldeed:collection2
 reactive-var
-alethes:pages
 msavin:mongol
-reactive-dict
-manuel:reactivearray

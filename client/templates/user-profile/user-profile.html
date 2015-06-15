@@ -1,3 +1,9 @@
-<template name="user-profile">
-	<h1>User: {{username}}</h1>
+<template name="user_profile">
+	<h1>{{username}}</h1>
+	
+	<h3>Card Ratings</h3>
+	{{#each ratings}}
+		{{card_name}}: {{rating}}
+		<br>
+	{{/each}}
 </template>

@@ -2,20 +2,43 @@ Meteor.methods
 ({
 	rateCard: function(cardID, rating)
 	{
-		console.log(cardID);
-		console.log(rating);
-		
 		if (!Meteor.userId())
 		{
 			// user needs to be logged TODO: router.go
 		} else
 		{
-			var card = Cards.findOne(cardID);
+			var user_ratings = Meteor.user().ratings;
+			var card = cards.findOne(cardID);
+			var rating_temp = rating;
+			var new_count = card.rate_count;
 			
-			var new_count = card.rate_count + 1;
-			var new_rating = (card.rating * card.rate_count + rating) / new_count;
+			// check if user has already voted on this card
+			var exists = false;
+			for (i in user_ratings)
+			{
+				if (user_ratings[i].cardID === cardID)
+				{
+					rating_temp -= user_ratings[i].rating;
+					
+					user_ratings[i].rating = rating;
+					
+					Meteor.users.update(Meteor.userId(), {$set: {ratings: user_ratings}});
+					
+					exists = true;
+					break;
+				}
+			}
 			
-			Cards.update(cardID, {$set: {rating: new_rating, rate_count: new_count}});
+			if (!exists)
+			{
+				Meteor.users.update(Meteor.userId(), {$addToSet: {ratings: {cardID: cardID, rating: rating}}});
+				
+				new_count++;
+			}
+			
+			var new_rating = ((card.rating * card.rate_count) + rating_temp) / new_count;
+			
+			cards.update(cardID, {$set: {rating: new_rating, rate_count: new_count}});
 		}
 	}
 });

@@ -10,5 +10,6 @@ accountsUIBootstrap3.logoutCallback = function(error) {
   Router.go('home');
 }
 
+Meteor.subscribe('userData');
 Meteor.subscribe('cards');
 Meteor.subscribe('filters');

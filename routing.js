@@ -58,7 +58,7 @@ Router.route('/card/:id',
 			{
 				data: function()
 				{
-					return Cards.findOne({_id: this.params.id});
+					return cards.findOne({_id: this.params.id});
 				}
 			});
 		}
@@ -71,7 +71,7 @@ Router.route('/user/:id',
 		name: 'users',
 		action: function()
 		{
-			this.render("user-profile",
+			this.render("user_profile",
 			{
 				data: function()
 				{

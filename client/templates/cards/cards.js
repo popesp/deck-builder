@@ -29,58 +29,37 @@ Template.cards.helpers
 	
 	cards: function()
 	{
-		return cards.find({});
-		/*
-		var filter_class = card_filter_class.find({}).fetch();
-		var filter_set = card_filter_set.find({}).fetch();
-		var filter_rarity = card_filter_rarity.find({}).fetch();
+		var card_filters_array = card_filters.find({}).fetch();
+		var query = {$and: [{name: {$exists: true}}]}; // TODO: find a better solution
 		
-		// TODO: temporary solution
-		var query = {$and: [{name: {$exists: true}}]};
-		
-		if (filter_class.length > 0)
+		for (i in card_filters_array)
 		{
+			var cf = card_filters_array[i];
 			
-			var or = new Array();
-			for (var i = 0; i < filter_class.length; i++)
+			if (cf.type === 'text')
 			{
-				if (filter_class[i].name === "Neutral")
-					or.push({playerClass: {$exists: false}});
-				else
-					or.push({playerClass: filter_class[i].name});
+				// text filter
+				if (cf.options.length > 0)
+				{
+					var options_in = {};
+					
+					options_in[cf.query] = {$in: cf.options};
+					
+					console.log(cf.options);
+					
+					query.$and.push(options_in);
+				}
+			} else if (cf.type === 'numeric')
+			{
+				
 			}
-			
-			query.$and.push({$or: or});
 		}
 		
-		if (filter_set.length > 0)
-		{
-			var or = new Array();
-			
-			for (var i = 0; i < filter_set.length; i++)
-			{
-				or.push({set: filter_set[i].name});
-			
-			}
-			query.$and.push({$or: or})
-		}
+		console.log(query);
 		
-		if (filter_rarity.length > 0)
-		{
-			var or = new Array();
-			
-			for (var i = 0; i < filter_rarity.length; i++)
-			{
-				or.push({rarity: filter_rarity[i].name});
-			
-			}
-			query.$and.push({$or: or})
-		}
+		Template.instance().card_count.set(cards.find(query).count());
 		
-		Template.instance().card_count.set(Cards.find(query).count());
-		
-		return Cards.find(query, {limit: CARDPAGE_LIMIT, skip: Template.instance().card_skip.get()});
-		*/
+		return cards.find(query, {limit: CARDPAGE_LIMIT, skip: Template.instance().card_skip.get()});
 	},
 	
 	cardCount: function()
@@ -119,7 +98,7 @@ Template.cards.events
 ({
 	"click .card-filter-add": function()
 	{
-		card_filters.insert({label: this.label, query: this.query, type: this.type, options: {}});
+		card_filters.insert({label: this.label, query: this.query, type: this.type, options: []});
 	},
 	
 	"click .page-btn": function()
@@ -148,9 +127,21 @@ Template.card_filter.helpers
 
 Template.card_filter.events
 ({
-	"click close": function()
+	"click .close": function()
 	{
-		// TODO
-		card_filters.remove();
+		card_filters.remove({query: this.query});
+	},
+	
+	"change input": function(event)
+	{
+		var data = Template.instance().data;
+		
+		if (event.target.checked)
+			card_filters.update({query: data.query}, {$addToSet: {options: String(this)}});
+		else
+		{
+			card_filters.update({query: data.query}, {$pullAll: {options: [String(this)]}})
+			console.log(this);
+		}
 	}
 });

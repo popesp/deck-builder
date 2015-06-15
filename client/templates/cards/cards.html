@@ -38,16 +38,21 @@
 			<div class="col-md-3">
 				<div class="card">
 					<div class="card-mana">{{cost}}</div>
-					<h3>{{name}}</h3>
+					<a href="/card/{{_id}}"><h3 class="card-rarity-{{rarity}}">{{name}}</h3></a>
 					
 					<p>{{{text}}}</p>
 					<p>Set: {{set}}</p>
 					<p>{{rarity}}</p>
-					
-					<a href="/card/{{_id}}">View Card</a>
 				</div>
 			</div>
 		{{/each}}
+	</div>
+		<div class="col-md-12">
+		<ul class="pagination">
+			{{#each page_btns}}
+				<li><a class="page-btn" href="#">{{this}}</a></li>
+			{{/each}}
+		</ul>
 	</div>
 </template>
 

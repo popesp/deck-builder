@@ -13,6 +13,12 @@ ul.nav > li:last-child
 	border: none;
 }
 
+a, a:hover
+{
+	text-decoration: none;
+	color: inherit;
+}
+
 .card
 {
 	background-color: #d0d0d0;
@@ -30,6 +36,21 @@ ul.nav > li:last-child
 	border: 1px solid #b0b0b0;
 	
 	display: inline-block;
+}
+
+.card-rarity-Rare
+{
+	color: #198eff;
+}
+
+.card-rarity-Epic
+{
+	color: #ab48ee;
+}
+
+.card-rarity-Legendary
+{
+	color: #f07000;
 }
 
 .card-mana
