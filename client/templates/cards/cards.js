@@ -1,6 +1,4 @@
-card_filter_class = new Mongo.Collection(null);
-card_filter_set = new Mongo.Collection(null);
-card_filter_rarity = new Mongo.Collection(null);
+card_filters = new Mongo.Collection(null);
 
 Template.cards.onCreated(function()
 {
@@ -19,23 +17,20 @@ Template.cards.onCreated(function()
 
 Template.cards.helpers
 ({
-	sets: function()
+	filters: function()
 	{
-		return Sets.find({});
+		return filters.find({});
 	},
 	
-	rarities: function()
+	card_filters: function()
 	{
-		return Rarities.find({});
-	},
-	
-	classes: function()
-	{
-		return Classes.find({});	
+		return card_filters.find({});
 	},
 	
 	cards: function()
 	{
+		return cards.find({});
+		/*
 		var filter_class = card_filter_class.find({}).fetch();
 		var filter_set = card_filter_set.find({}).fetch();
 		var filter_rarity = card_filter_rarity.find({}).fetch();
@@ -85,6 +80,7 @@ Template.cards.helpers
 		Template.instance().card_count.set(Cards.find(query).count());
 		
 		return Cards.find(query, {limit: CARDPAGE_LIMIT, skip: Template.instance().card_skip.get()});
+		*/
 	},
 	
 	cardCount: function()
@@ -121,34 +117,9 @@ Template.cards.helpers
 
 Template.cards.events
 ({
-	"change .card-filters-class-check": function(event)
+	"click .card-filter-add": function()
 	{
-		if (event.target.checked)
-			card_filter_class.insert({name: this.name});
-		else
-			card_filter_class.remove({name: this.name});
-		
-		Template.instance().card_page_num.set(1);
-	},
-	
-	"change .card-filters-set-check": function(event)
-	{
-		if (event.target.checked)
-			card_filter_set.insert({name: this.name});
-		else
-			card_filter_set.remove({name: this.name});
-		
-		Template.instance().card_page_num.set(1);
-	},
-	
-	"change .card-filters-rarity-check": function(event)
-	{
-		if (event.target.checked)
-			card_filter_rarity.insert({name: this.name});
-		else
-			card_filter_rarity.remove({name: this.name});
-		
-		Template.instance().card_page_num.set(1);
+		card_filters.insert({label: this.label, query: this.query, type: this.type, options: {}});
 	},
 	
 	"click .page-btn": function()
@@ -157,26 +128,29 @@ Template.cards.events
 	}
 });
 
-Template.card_filter_class.helpers
+Template.card_filter.helpers
 ({
-	checked: function()
+	type_text: function()
 	{
-		return false;
+		return filters.findOne({query: this.query}).type === 'text';
+	},
+	
+	type_numeric: function()
+	{
+		return filters.findOne({query: this.query}).type === 'numeric';
+	},
+	
+	options: function()
+	{
+		return filters.findOne({query: this.query}).options;
 	}
 });
 
-Template.card_filter_set.helpers
+Template.card_filter.events
 ({
-	checked: function()
+	"click close": function()
 	{
-		return false;
-	}
-});
-
-Template.card_filter_rarity.helpers
-({
-	checked: function()
-	{
-		return false;
+		// TODO
+		card_filters.remove();
 	}
 });

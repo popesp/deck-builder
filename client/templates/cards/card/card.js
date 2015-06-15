@@ -8,6 +8,11 @@ Template.card.helpers
 	ratings: function()
 	{
 		return [1, 2, 3, 4, 5];
+	},
+	
+	ratingFormat: function()
+	{
+		return Template.instance().data.rating.toFixed(2);
 	}
 });
 

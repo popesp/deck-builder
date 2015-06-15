@@ -1,82 +1,70 @@
 <template name="cards">
 	<h1>Card Database</h1>
 	
-	<div class="card-filters-class">
-		<h2>Class</h2>
-		{{#each classes}}
-			{{> card_filter_class}}
-		{{/each}}
-		{{> card_filter_class name="Neutral"}}
+	<div class="btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i> Add a Filter</button>
+		
+		<ul class="dropdown-menu" role="menu">
+			{{#each filters}}
+				<li><a href="#" class="card-filter-add">{{label}}</a></li>
+			{{/each}}
+		</ul>
 	</div>
 	
-	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filter Options</a>
-	<div class="collapse" id="collapseExample">
-		<div class="card-filters">
-			<div class="card-filters-set">
-				<h3>Set</h3>
-				{{#each sets}}
-					{{> card_filter_set}}
-				{{/each}}
-			</div>
-			<div class="card-filters-rarity">
-				<h3>Rarity</h3>
-				{{#each rarities}}
-					{{> card_filter_rarity}}
-				{{/each}}
-			</div>
-		</div>
+	<div class="card-filters">
+		{{#each card_filters}}
+			{{> card_filter}}
+		{{/each}}
 	</div>
 	
-	<br>
+	<div class="col-md-12">
+		<ul class="pagination">
+			{{#each page_btns}}
+				<li><a class="page-btn" href="#">{{this}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
 	
-	<ul class="pagination">
-		{{#each page_btns}}
-			{{> card_page_btn}}
-		{{/each}}
-	</ul>
-	
-	<br>
-	
-	{{#if cardCount}}
-		<span class="align-right">Displaying {{cardSkip}} to {{cardMax}} of {{cardCount}}</span>
-	{{else}}
-		No cards match your query.
-	{{/if}}
+	<div class="col-md-12">
+		{{#if cardCount}}
+			<span class="align-right">Displaying {{cardSkip}} to {{cardMax}} of {{cardCount}}</span>
+		{{else}}
+			No cards match your query.
+		{{/if}}
+	</div>
 	
 	<div class="row">
 		{{#each cards}}
-			{{> card_display}}
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-mana">{{cost}}</div>
+					<h3>{{name}}</h3>
+					
+					<p>{{{text}}}</p>
+					<p>Set: {{set}}</p>
+					<p>{{rarity}}</p>
+					
+					<a href="/card/{{_id}}">View Card</a>
+				</div>
+			</div>
 		{{/each}}
 	</div>
 </template>
 
-<template name="card_filter_class">
-	<input class="card-filters-class-check" type="checkbox" checked="{{checked}}"> {{name}}
-</template>
-
-<template name="card_filter_rarity">
-	<input class="card-filters-rarity-check" type="checkbox" checked="{{checked}}"> {{name}}
-</template>
-
-<template name="card_filter_set">
-	<input class="card-filters-set-check" type="checkbox" checked="{{checked}}"> {{name}}
-</template>
-
-<template name="card_display">
+<template name="card_filter">
 	<div class="col-md-3">
-		<div class="card">
-			<div class="card-mana">{{cost}}</div>
-			<h3>{{name}}</h3>
-			
-			<p>{{{text}}}</p>
-			<p>Set: {{set}}</p>
-			<p>{{rarity}}</p>
-			
-			<a href="/card/{{_id}}">View Card</a>
+		<div class="alert alert-dismissable alert-info fade in">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4>{{label}}</h4>
+			{{#if type_text}}
+				<div class="text-left">
+					{{#each options}}
+						<div class="card-filter-checkbox"><input type="checkbox"> {{this}}</div>
+					{{/each}}
+				</div>
+			{{/if}}
+			{{#if type_numeric}}
+			{{/if}}
 		</div>
 	</div>
-</template>
-
-<template name="card_page_btn">
-	<li><a class="page-btn" href="#">{{this}}</a></li>
 </template>
