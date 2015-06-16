@@ -1,0 +1,40 @@
+.X
+{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 18px;
+}
+
+.login-box
+{
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	width: 200px;
+	height: 200px;
+
+	box-shadow: 5px 5px 5px #d0d0d0;
+	background-color: #e7e7e7;
+}
+
+.login-entry
+{
+	position: absolute;
+	margin-top: 20px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	height: 100px;
+}
+
+.login-text
+{
+	margin: 10px;
+}
