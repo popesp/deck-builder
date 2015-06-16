@@ -1,0 +1,38 @@
+
+
+<template name="home">
+	<div class="text-center">
+		<div class="jumbotron">
+  			<h1>Deck Builder</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<a href="/build"> <div class = "homeButton"> Build </div> </a>
+			</div>
+
+			<div class="col-md-4">
+				<a href="/decks"> <div class = "homeButton"> Browse </div> </a>
+			</div>
+
+			<div class="col-md-4">
+				<a href="/cards"> <div class = "homeButton"> Cards</div> </a>
+			</div>
+
+
+		</div>
+	 	<br>
+	 
+	{{#if currentUser}}
+		You are currently logged in as: {{currentUser.username}}
+		<br>
+		<div class="col-md-12">
+			<a href="/user/{{currentUser._id}}"> <div class = "bottomButton btn btn-primary btn-lg"> View Profile </div> </a>
+			<a href="#"> <div class = "logoutButton bottomButton btn btn-primary btn-lg"> Log Out </div> </a>
+
+			</div> 
+	 {{else}}
+	 	<p><a class="bottomButton btn btn-primary btn-lg" href="/login" role="button">Log In</a></p>
+	{{/if}}
+ 	</div>
+
+</template>
