@@ -1,31 +1,16 @@
 <template name="header">
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Deck Builder</a>
-			</div>
-			
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					{{#if currentUser}}
-						<li>
-							{{#linkTo route="build"}}<i class="fa fa-plus"></i> Build Deck{{/linkTo}}
-						</li>
-						
-						<li>
-							{{#linkTo route="decks"}}<i class="fa fa-eye"></i> Browse Decks{{/linkTo}}
-						</li>
-					{{/if}}
-					
-					<li>
-						{{#linkTo route="cards"}}<i class="fa fa-bars"></i> Card Database{{/linkTo}}
-					</li>
-					
-					<li>
-						<div class="nav navbar-nav navbar-right"> {{> loginButtons}}</div>
-					</li>
+	<div class="header clearfix">
+		<div class="inner">
+			<h3 class="header-brand">Deck Builder</h3>
+			<nav>
+				<ul class="nav header-nav">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Build</a></li>
+					<li><a href="#">Browse</a></li>
+					<li><a href="#">Card DB</a></li>
+					{{> loginButtons}}
 				</ul>
-			</div>
+			</nav>
 		</div>
-	</nav>
+	</div>
 </template>

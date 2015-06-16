@@ -1,7 +1,13 @@
 <template name="main">
-	{{> header}}
-	<div class="container text-center">
-		{{> yield}}
+	<div class="site-wrapper">
+		<div class="site-wrapper-inner">
+			<div class="cover-container">
+				{{> header}}
+				<div class="inner cover">
+					{{> yield}}
+				</div>
+				{{> footer}}
+			</div>
+		</div>
 	</div>
-	{{> footer}}
 </template>
