@@ -1,13 +1,12 @@
 <template name="header">
 	<div class="header clearfix">
 		<div class="inner">
-			<h3 class="header-brand">Deck Builder</h3>
+			<a href="/"><h3 class="header-brand">Deck Builder</h3></a>
 			<nav>
 				<ul class="nav header-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Build</a></li>
-					<li><a href="#">Browse</a></li>
-					<li><a href="#">Card DB</a></li>
+					<li><a href="/build">Build</a></li>
+					<li><a href="/decks">Browse</a></li>
+					<li><a href="/cards">Card DB</a></li>
 					{{> loginButtons}}
 				</ul>
 			</nav>

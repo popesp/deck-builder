@@ -49,16 +49,24 @@ body
 
 .inner
 {
-	padding: 30px;
+	padding: 15px;
 }
 
 
 
 /* --- header --- */
+.header
+{
+	background-color: rgba(40,40,40,.8);
+	border-radius: 5px;
+}
+
 .header-brand
 {
 	margin-top: 10px;
 	margin-bottom: 10px;
+	
+	font-family: title-font;
 }
 
 .header-nav > li
@@ -110,6 +118,14 @@ body
 
 
 
+/* --- font --- */
+@font-face {
+	font-family: 'title-font';
+	src: url('fonts/bliz-quadrata.woff') format('woff');
+}
+
+
+
 /* --- cover --- */
 .cover
 {
@@ -128,6 +144,9 @@ body
 {
 	color: #999;
 	color: rgba(255,255,255,.5);
+	
+	background-color: rgba(0,0,0,.8);
+	border-radius: 5px;
 }
 
 
@@ -158,11 +177,11 @@ body
 	}
 }
 
-@media (min-width: 992px)
+@media (min-width: 1024px)
 {
 	.header,.footer,.cover-container
 	{
-		width: 700px;
+		width: 1024px;
 	}
 }
 
@@ -233,6 +252,3 @@ body
 	background-color: #e0e020;
 	color: #202020;
 }
-
-
-

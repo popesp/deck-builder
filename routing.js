@@ -7,8 +7,6 @@ Router.configure
 // Home
 Router.route('/',
 	{
-
-		layoutTemplate: null,
 		name: 'home',
 		action: function()
 		{
