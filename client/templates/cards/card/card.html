@@ -1,9 +1,9 @@
 <template name="card">
-	<h1 class="card-rarity-{{rarity}}">{{name}}</h1>
+	<h1 class="card-rarity-{{rarityName}}">{{name}}</h1>
 	
-	<div class="container">{{{text}}}</div>
+	<div class="container-fluid">{{{text}}}</div>
 	
-	<div class="container">
+	<div class="container-fluid">
 		Cost: {{cost}}
 		
 		{{#if isMinion}}
@@ -45,6 +45,13 @@
 	{{#each ratings}}
 		{{> card_rating_btn}}
 	{{/each}}
+	
+	<br>
+	
+	{{#if hasRated}}
+		You have rated this card {{user_rating}}.
+	{{/if}}
+	
 </template>
 
 <template name="card_rating_btn">

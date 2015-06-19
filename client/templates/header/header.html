@@ -1,0 +1,22 @@
+<template name="header">
+	<div class="header clearfix">
+		<div class="inner">
+			<a href="/"><h3 class="header-brand">Deck Builder</h3></a>
+			
+			<input class="form-control typeahead card-search" name="card-search" type="text" data-highlight="true" placeholder="Search the card database..." autocomplete="off" spellcheck="off" data-value-key="name" data-source="getCards" data-selected="selected" data-template="card_suggestion"/>
+			
+			<nav>
+				<ul class="nav header-nav">
+					<li><a href="/build">Build</a></li>
+					<li><a href="/decks">Browse</a></li>
+					<li><a href="/cards">Card DB</a></li>
+					{{> loginButtons}}
+				</ul>
+			</nav>
+		</div>
+	</div>
+</template>
+
+<template name="card_suggestion">
+	<div class="card-suggestion"><p>{{name}}</p></div>
+</template>

@@ -1,5 +1,3 @@
-card_filters = new Mongo.Collection(null);
-
 Template.cards.onCreated(function()
 {
 	this.card_count = new ReactiveVar(0);
@@ -19,7 +17,7 @@ Template.cards.helpers
 ({
 	filters: function()
 	{
-		return filters.find({});
+		return filters.find({}, {fields: {label: 1}});
 	},
 	
 	card_filters: function()
@@ -30,36 +28,42 @@ Template.cards.helpers
 	cards: function()
 	{
 		var card_filters_array = card_filters.find({}).fetch();
-		var query = {$and: [{name: {$exists: true}}]}; // TODO: find a better solution
+		var query = {$and: [{name: {$exists: true}}]};
+		var instance = Template.instance();
 		
 		for (i in card_filters_array)
 		{
 			var cf = card_filters_array[i];
+			var filter = filters.findOne(cf.filterID);
+			var ftype = filter_types.findOne(filter.typeID);
 			
-			if (cf.type === 'text')
+			if (ftype.name === 'singular')
 			{
-				// text filter
 				if (cf.options.length > 0)
 				{
 					var options_in = {};
 					
-					options_in[cf.query] = {$in: cf.options};
-					
-					console.log(cf.options);
-					
+					options_in[filters.findOne(cf.filterID).card_field] = {$in: cf.options}
 					query.$and.push(options_in);
 				}
-			} else if (cf.type === 'numeric')
+			} else if (ftype.name === 'multiple')
+			{
+				if (cf.options.length > 0)
+				{
+					var options_in = {};
+					
+					options_in[filters.findOne(cf.filterID).card_field] = {$in: cf.options}
+					query.$and.push(options_in);
+				}
+			} else if (ftype.name === 'numeric')
 			{
 				
 			}
 		}
 		
-		console.log(query);
+		instance.card_count.set(cards_sorted.find(query).count());
 		
-		Template.instance().card_count.set(cards.find(query).count());
-		
-		return cards.find(query, {limit: CARDPAGE_LIMIT, skip: Template.instance().card_skip.get()});
+		return cards_sorted.find(query, {limit: CARDPAGE_LIMIT, skip: instance.card_skip.get()});
 	},
 	
 	cardCount: function()
@@ -91,6 +95,16 @@ Template.cards.helpers
 			numbers.push(i + 1);
 		
 		return numbers;
+	},
+	
+	setName: function()
+	{
+		return sets.findOne(this.setID).name;
+	},
+	
+	rarityName: function()
+	{
+		return rarities.findOne(this.rarityID).name;
 	}
 });
 
@@ -98,30 +112,31 @@ Template.cards.events
 ({
 	"click .card-filter-add": function()
 	{
-		card_filters.insert({label: this.label, query: this.query, type: this.type, options: []});
+		if (filter_types.findOne(filters.findOne(this._id).typeID).name !== 'singular' || card_filters.findOne({filterID: this._id}) === undefined)
+			card_filters.insert({label: this.label, filterID: this._id, options: []});
 	},
 	
 	"click .page-btn": function()
 	{
 		Template.instance().card_page_num.set(this);
+	},
+	
+	"change .card-filter-checkbox": function()
+	{
+		Template.instance().card_page_num.set(1);
 	}
 });
 
 Template.card_filter.helpers
 ({
-	type_text: function()
+	type: function()
 	{
-		return filters.findOne({query: this.query}).type === 'text';
-	},
-	
-	type_numeric: function()
-	{
-		return filters.findOne({query: this.query}).type === 'numeric';
+		return filter_types.findOne(filters.findOne(this.filterID).typeID).name;
 	},
 	
 	options: function()
 	{
-		return filters.findOne({query: this.query}).options;
+		return Mongo.Collection.get(filters.findOne(this.filterID).collection_name).find({});
 	}
 });
 
@@ -129,7 +144,7 @@ Template.card_filter.events
 ({
 	"click .close": function()
 	{
-		card_filters.remove({query: this.query});
+		card_filters.remove(this._id);
 	},
 	
 	"change input": function(event)
@@ -137,11 +152,8 @@ Template.card_filter.events
 		var data = Template.instance().data;
 		
 		if (event.target.checked)
-			card_filters.update({query: data.query}, {$addToSet: {options: String(this)}});
+			card_filters.update(data._id, {$addToSet: {options: this._id}});
 		else
-		{
-			card_filters.update({query: data.query}, {$pullAll: {options: [String(this)]}})
-			console.log(this);
-		}
+			card_filters.update(data._id, {$pullAll: {options: [this._id]}})
 	}
 });

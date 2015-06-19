@@ -7,9 +7,11 @@
 meteor-platform
 twbs:bootstrap
 iron:router
-ian:accounts-ui-bootstrap-3
 accounts-password
 fortawesome:fontawesome
 aldeed:collection2
 reactive-var
 msavin:mongol
+ian:accounts-ui-bootstrap-3
+dburles:mongo-collection-instances
+sergeyt:typeahead

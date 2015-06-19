@@ -25,6 +25,11 @@ body
 	text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
+h1,h2,h3,h4,h5,h6
+{
+	font-family: title-font;
+}
+
 .site-wrapper
 {
 	display: table;
@@ -57,16 +62,16 @@ body
 /* --- header --- */
 .header
 {
-	background-color: rgba(40,40,40,.8);
+	background-color: rgba(40,40,40,.95);
 	border-radius: 5px;
+	
+	z-index: 1000;
 }
 
 .header-brand
 {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	
-	font-family: title-font;
 }
 
 .header-nav > li
@@ -74,15 +79,9 @@ body
 	display: inline-block;
 }
 
-.header-nav > li + li
-{
-	margin-left: 20px;
-}
-
 .header-nav > li > a
 {
-	padding-right: 0;
-	padding-left: 0;
+	padding: 10px;
 	font-size: 16px;
 	font-weight: bold;
 	color: #fff;
@@ -129,7 +128,7 @@ body
 /* --- cover --- */
 .cover
 {
-	padding: 0 20px;
+	padding: 50px 20px;
 }
 .cover .btn-lg
 {
@@ -145,8 +144,10 @@ body
 	color: #999;
 	color: rgba(255,255,255,.5);
 	
-	background-color: rgba(0,0,0,.8);
+	background-color: rgba(40,40,40,.95);
 	border-radius: 5px;
+	
+	z-index: 1000;
 }
 
 
@@ -187,10 +188,49 @@ body
 
 
 
+/* --- pagination buttons --- */
+.pagination .page-btn
+{
+	padding: 6px 0;
+	width: 32px;
+	
+	color: #f0f0f0;
+	background-color: #202020;
+	border-color: #282828;
+}
+
+.pagination .page-btn:hover
+{
+}
+
+
+
+/* --- login --- */
+#login-dropdown-list.open > a
+{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: rgba(45,45,45,.95);
+}
+
+#login-dropdown-list > .dropdown-menu
+{
+	right: 0;
+}
+
+
+
+.alert-info
+{
+	background-color: #fff;
+}
+
 .card
 {
-	background-color: #d0d0d0;
-	color: #202020;
+	background-color: #202020;
+	color: #f0f0f0;
+	
+	box-shadow: -5px 5px 5px rgba(0,0,0,.5);
 	
 	height: 220px;
 	overflow: hidden;
@@ -199,9 +239,7 @@ body
 	padding: 10px;
 	width: 100%;
 	
-	border-radius: 10px;
-	
-	border: 1px solid #b0b0b0;
+	border-radius: 5px;
 	
 	display: inline-block;
 }
@@ -233,6 +271,11 @@ body
 	border-radius: 5px;
 }
 
+.card-filters
+{
+	margin-top: 20px;
+}
+
 .card-filter-checkbox
 {
 	display: inline-block;
@@ -251,4 +294,20 @@ body
 {
 	background-color: #e0e020;
 	color: #202020;
+}
+
+.twitter-typeahead
+{
+	margin-left: 50px;
+	float: left;
+}
+
+.card-suggestion
+{
+	padding: 4px 20px;
+}
+
+.tt-dataset
+{
+	background-color: #202020;
 }

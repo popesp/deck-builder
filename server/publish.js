@@ -5,10 +5,47 @@ Meteor.publish('userData', function ()
 
 Meteor.publish('cards', function()
 {
-	return cards.find({collectible: true, type: {$ne: "Hero"}});
+	return cards.find({});
 });
+
+
+Meteor.publish('types', function()
+{
+	return types.find({});
+});
+
+Meteor.publish('rarities', function()
+{
+	return rarities.find({});
+});
+
+Meteor.publish('races', function()
+{
+	return races.find({});
+});
+
+Meteor.publish('player_classes', function()
+{
+	return player_classes.find({});
+});
+
+Meteor.publish('sets', function()
+{
+	return sets.find({});
+});
+
+Meteor.publish('mechanics', function()
+{
+	return mechanics.find({});
+});
+
 
 Meteor.publish('filters', function()
 {
 	return filters.find({});
+});
+
+Meteor.publish('filter_types', function()
+{
+	return filter_types.find({});
 });

@@ -25,12 +25,14 @@
 		</ul>
 	</div>
 	
-	<div class="col-md-12">
-		{{#if cardCount}}
-			<span class="align-right">Displaying {{cardSkip}} to {{cardMax}} of {{cardCount}}</span>
-		{{else}}
-			No cards match your query.
-		{{/if}}
+	<div class="row">
+		<div class="col-md-12 text-right">
+			{{#if cardCount}}
+				<span class="align-right">Displaying {{cardSkip}} to {{cardMax}} of {{cardCount}}</span>
+			{{else}}
+				No cards match your query.
+			{{/if}}
+		</div>
 	</div>
 	
 	<div class="row">
@@ -38,29 +40,39 @@
 			<div class="col-md-3">
 				<div class="card">
 					<div class="card-mana">{{cost}}</div>
-					<a href="/card/{{_id}}"><h3 class="card-rarity-{{rarity}}">{{name}}</h3></a>
+					<a href="/card/{{_id}}"><h3 class="card-rarity-{{rarityName}}">{{name}}</h3></a>
 					
 					<p>{{{text}}}</p>
-					<p>Set: {{set}}</p>
-					<p>{{rarity}}</p>
+					<p>Set: {{setName}}</p>
+					<p>{{rarityName}}</p>
 				</div>
 			</div>
 		{{/each}}
 	</div>
+	
+	<div class="row">
 		<div class="col-md-12">
-		<ul class="pagination">
-			{{#each page_btns}}
-				<li><a class="page-btn" href="#">{{this}}</a></li>
-			{{/each}}
-		</ul>
+			<ul class="pagination">
+				{{#each page_btns}}
+					<li><a class="page-btn" href="#">{{this}}</a></li>
+				{{/each}}
+			</ul>
+		</div>
 	</div>
 </template>
 
 <template name="card_filter">
 	<div class="col-md-3">
-		<div class="alert alert-dismissable alert-info fade in">
+		<div class="alert alert-dismissable alert-info">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4>{{label}}</h4>
+			<div class="text-left">
+				{{#each options}}
+					<div class="card-filter-checkbox"><input type="checkbox"> {{name}}</div>
+				{{/each}}
+			</div>
+			<!--
+			{{> Template.dynamic template="card_filter_{{type}}"}}
 			{{#if type_text}}
 				<div class="text-left">
 					{{#each options}}
@@ -70,6 +82,7 @@
 			{{/if}}
 			{{#if type_numeric}}
 			{{/if}}
+			-->
 		</div>
 	</div>
 </template>

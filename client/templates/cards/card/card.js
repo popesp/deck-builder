@@ -1,8 +1,3 @@
-Template.card.onCreated(function()
-{
-	console.log(this.data);
-});
-
 Template.card.helpers
 ({
 	ratings: function()
@@ -32,6 +27,31 @@ Template.card.helpers
 		if (this.race === undefined)
 			return false;
 		return true;
+	},
+	
+	rarityName: function()
+	{
+		return rarities.findOne(this.rarityID).name
+	},
+	
+	hasRated: function()
+	{
+		var user_ratings = Meteor.user().ratings;
+		
+		for (i in user_ratings)
+			if (user_ratings[i].cardID === this._id)
+				return true;
+		
+		return false;
+	},
+	
+	user_rating: function()
+	{
+		var user_ratings = Meteor.user().ratings;
+		
+		for (i in user_ratings)
+			if (user_ratings[i].cardID === this._id)
+				return user_ratings[i].rating;
 	}
 });
 

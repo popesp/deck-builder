@@ -10,6 +10,5 @@ accountsUIBootstrap3.logoutCallback = function(error) {
   Router.go('home');
 }
 
-Meteor.subscribe('userData');
-Meteor.subscribe('cards');
-Meteor.subscribe('filters');
+cards_sorted = new Mongo.Collection(null);
+card_filters = new Mongo.Collection(null);

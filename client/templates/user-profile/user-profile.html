@@ -3,7 +3,7 @@
 	
 	<h3>Card Ratings</h3>
 	{{#each ratings}}
-		{{card_name}}: {{rating}}
+		<a href="/card/{{this.cardID}}"><h3> {{card_name}}: {{rating}}</h3></a>
 		<br>
 	{{/each}}
 </template>
