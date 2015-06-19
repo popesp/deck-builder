@@ -8,8 +8,8 @@ Template.cards.onCreated(function()
 	
 	this.autorun(function()
 	{
-		Template.instance().card_page_count.set(Math.floor(Template.instance().card_count.get() / 32) + 1);
-		Template.instance().card_skip.set((Template.instance().card_page_num.get() - 1) * CARDPAGE_LIMIT);
+		Template.instance().card_page_count.set(Math.floor(Template.instance().card_count.get() / CARDPAGE_LIMIT_DB) + 1);
+		Template.instance().card_skip.set((Template.instance().card_page_num.get() - 1) * CARDPAGE_LIMIT_DB);
 	})
 });
 
@@ -63,7 +63,7 @@ Template.cards.helpers
 		
 		instance.card_count.set(cards_sorted.find(query).count());
 		
-		return cards_sorted.find(query, {limit: CARDPAGE_LIMIT, skip: instance.card_skip.get()});
+		return cards_sorted.find(query, {limit: CARDPAGE_LIMIT_DB, skip: instance.card_skip.get()});
 	},
 	
 	cardCount: function()
@@ -84,7 +84,7 @@ Template.cards.helpers
 		if (page_num == page_count)
 			return  Template.instance().card_count.get();
 		
-		return Template.instance().card_skip.get() + CARDPAGE_LIMIT;
+		return Template.instance().card_skip.get() + CARDPAGE_LIMIT_DB;
 	},
 	
 	page_btns: function()
@@ -105,6 +105,11 @@ Template.cards.helpers
 	rarityName: function()
 	{
 		return rarities.findOne(this.rarityID).name;
+	},
+	
+	card_image: function()
+	{
+		return this.name.replace(/ /g, '_').toLowerCase() + '.png';
 	}
 });
 

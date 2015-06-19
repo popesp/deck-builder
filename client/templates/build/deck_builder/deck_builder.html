@@ -1,0 +1,36 @@
+<template name="deck_builder">
+	<h1>Deck Builder</h1>
+	
+	<div class="row>">
+		<div class="col-md-9">
+			<div class="col-md-12">
+				<ul class="pagination">
+					{{#each page_btns}}
+						<li><a class="page-btn" href="#">{{this}}</a></li>
+					{{/each}}
+				</ul>
+			</div>
+			
+			<div class="row">
+				{{#each cards}}
+					<div class="col-md-3">
+						<a class="deckbuilder-card" href="#"><img width="120%" src="../imgs/{{card_image}}"></a>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		<div class="col-md-3 deckbuilder-sidebar">
+			<h2> Current Deck </h2>
+			{{#each deck_entries}}
+				<a href="#">
+					<div class="deck-entry">
+						<div class="deck-entry-count">{{count}}</div> {{entry_name}}
+					</div>
+				</a>
+			{{/each}}
+			<div class="deck-counter">
+				{{deck_counter}} / 30
+			</div>
+		</div>
+	</div>	
+</template>

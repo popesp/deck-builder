@@ -75,6 +75,24 @@ Router.route('/card/:id',
 	}
 );
 
+// Deck builder
+Router.route('/build/:name',
+	{
+		name: 'deck_builder',
+		action: function()
+		{
+			this.render("deck_builder",
+			{
+				data: function()
+				{
+					return player_classes.findOne({name: this.params.name});
+				}
+			});
+		}
+	}
+);
+
+
 // User Profiles
 Router.route('/user/:id',
 	{

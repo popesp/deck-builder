@@ -2,6 +2,7 @@
 a,a:focus,a:hover
 {
 	color: #fff;
+	text-decoration: none;
 }
 
 .btn-default,.btn-default:hover,.btn-default:focus
@@ -310,4 +311,43 @@ h1,h2,h3,h4,h5,h6
 .tt-dataset
 {
 	background-color: #202020;
+}
+
+.deckbuilder-sidebar
+{
+	background-color: rgba(40,40,40,.95);
+	
+	border-radius: 5px;
+}
+
+.deck-entry
+{
+	background-color: #202020;
+	
+	padding: 5px 10px;
+	margin: 4px 0;
+	
+	text-align: left;
+	
+	border-radius: 5px;
+}
+
+.deck-entry-count
+{
+	display: inline-block;
+	
+	padding: 0 8px;
+	margin-right: 10px;
+	
+	font-family: title-font;
+	font-size: 18px;
+	
+	border-radius: 5px;
+	
+	background-color: #303030;
+}
+
+.deck-counter
+{
+	
 }

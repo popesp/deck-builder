@@ -37,6 +37,10 @@
 	
 	<div class="row">
 		{{#each cards}}
+		<div class="col-md-3">
+			<a href="/card/{{_id}}"><img width="95%" src="imgs/{{card_image}}"></a>
+		</div>
+			<!--
 			<div class="col-md-3">
 				<div class="card">
 					<div class="card-mana">{{cost}}</div>
@@ -47,6 +51,7 @@
 					<p>{{rarityName}}</p>
 				</div>
 			</div>
+			-->
 		{{/each}}
 	</div>
 	

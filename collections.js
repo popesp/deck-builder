@@ -268,6 +268,13 @@ schemas.deck_incomplete = new SimpleSchema
 		max: 64
 	},
 	
+	player_classID:
+	{
+		type: String,
+		label: 'Class',
+		regEx: SimpleSchema.RegEx.Id
+	},
+	
 	authorID:
 	{
 		type: String,
@@ -296,6 +303,13 @@ schemas.deck_complete = new SimpleSchema
 		type: String,
 		label: 'Name',
 		max: 64
+	},
+	
+	player_classID:
+	{
+		type: String,
+		label: 'Class',
+		regEx: SimpleSchema.RegEx.Id
 	},
 	
 	authorID:
