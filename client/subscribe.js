@@ -1,11 +1,17 @@
 Meteor.subscribe('userData');
 Meteor.subscribe('cards', function()
 {
-	var sorted_array = cards.find({}, {sort: {name: 1}, reactive: false}).fetch();
+	var sorted_by_name = cards.find({}, {sort: {name: 1}, reactive: false}).fetch();
+	var sorted_by_cost = cards.find({}, {sort: {cost: 1, name: 1}, reactive: false}).fetch();
 	
-	cards_sorted.remove({});
-	for (var i in sorted_array)
-		cards_sorted.insert(sorted_array[i]);
+	cards_by_name.remove({});
+	cards_by_cost.remove({});
+	
+	for (var i in sorted_by_name)
+	{
+		cards_by_name.insert(sorted_by_name[i]);
+		cards_by_cost.insert(sorted_by_cost[i]);
+	}
 });
 
 Meteor.subscribe('types');
@@ -17,3 +23,6 @@ Meteor.subscribe('mechanics');
 
 Meteor.subscribe('filters');
 Meteor.subscribe('filter_types');
+
+Meteor.subscribe('decks_incomplete');
+Meteor.subscribe('decks_complete');

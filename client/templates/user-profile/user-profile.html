@@ -1,9 +1,19 @@
 <template name="user_profile">
 	<h1>{{username}}</h1>
 	
+	<h2>{{username}}'s Decks</h2>
+	{{#each decks}}
+		<a href="../browse/{{_id}}" style="color:{{class_color}}">{{name}}</a><br>
+	{{/each}}
+	
 	<h3>Card Ratings</h3>
 	{{#each ratings}}
-		<a href="/card/{{this.cardID}}"><h3> {{card_name}}: {{rating}}</h3></a>
-		<br>
+		<p>
+		{{#with card_by_id}}
+			
+			<a href="/card/{{_id}}">{{> card_text}}</a>
+		{{/with}}
+		: {{rating}}
+		</p>
 	{{/each}}
 </template>

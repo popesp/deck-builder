@@ -7,9 +7,12 @@
 			
 			<nav>
 				<ul class="nav header-nav">
-					<li><a href="/build">Build</a></li>
-					<li><a href="/decks">Browse</a></li>
-					<li><a href="/cards">Card DB</a></li>
+					<li><a href="/build"><i class="fa fa-plus"></i> New Deck</a></li>
+					{{#if display_edit}}
+						<li><a href="/edit" data-toggle="tooltip" data-placement="bottom" title="{{#if active_deck}}Currently Editing: {{current_deck}}{{/if}}"><i class="fa fa-pencil"></i> Edit Deck</a></li>
+					{{/if}}
+					<li><a href="/browse"><i class="fa fa-list-ul"></i> Browse Decks</a></li>
+					<li><a href="/cards"><i class="fa fa-database"></i> Card DB</a></li>
 					{{> loginButtons}}
 				</ul>
 			</nav>

@@ -1,0 +1,14 @@
+.card-text + .tooltip > .tooltip-inner
+{
+	background-color: transparent;
+}
+
+.card-text + .tooltip
+{
+	opacity: 1;
+}
+
+.card-text + .tooltip > .tooltip-arrow
+{
+	border: none;
+}

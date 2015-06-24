@@ -1,6 +1,8 @@
+/*
 Meteor.startup(function ()
 {
 	// clear the collections
+	
 	cards.remove({});
 	filters.remove({});
 	filter_types.remove({});
@@ -16,11 +18,11 @@ Meteor.startup(function ()
 	types.insert({name: 'Spell'});
 	types.insert({name: 'Weapon'});
 	
-	rarities.insert({name: 'Free'});
-	rarities.insert({name: 'Common'});
-	rarities.insert({name: 'Rare'});
-	rarities.insert({name: 'Epic'});
-	rarities.insert({name: 'Legendary'});
+	rarities.insert({name: 'Free', dust: 0, color: '#a0a0a0'});
+	rarities.insert({name: 'Common', dust: 40, color: '#f0f0f0'});
+	rarities.insert({name: 'Rare', dust: 100, color: '#198eff'});
+	rarities.insert({name: 'Epic', dust: 400, color: '#ab48ee'});
+	rarities.insert({name: 'Legendary', dust: 1600, color: '#f07000'});
 	
 	races.insert({name: 'Beast'});
 	races.insert({name: 'Mech'});
@@ -30,24 +32,24 @@ Meteor.startup(function ()
 	races.insert({name: 'Demon'});
 	races.insert({name: 'Dragon'});
 
-	player_classes.insert({name: 'Hunter'});
-	player_classes.insert({name: 'Warlock'});
-	player_classes.insert({name: 'Mage'});
-	player_classes.insert({name: 'Rogue'});
-	player_classes.insert({name: 'Paladin'});
-	player_classes.insert({name: 'Druid'});
-	player_classes.insert({name: 'Shaman'});
-	player_classes.insert({name: 'Warrior'});
-	player_classes.insert({name: 'Priest'});
-	player_classes.insert({name: 'Neutral'});
+	player_classes.insert({name: 'Hunter', color: '#006600'});
+	player_classes.insert({name: 'Warlock', color: '#5c0099'});
+	player_classes.insert({name: 'Mage', color: '#85c2ff'});
+	player_classes.insert({name: 'Rogue', color: '#999999'});
+	player_classes.insert({name: 'Paladin', color: '#ffcc00'});
+	player_classes.insert({name: 'Druid', color: '#754719'});
+	player_classes.insert({name: 'Shaman', color: '#003399'});
+	player_classes.insert({name: 'Warrior', color: '#800000'});
+	player_classes.insert({name: 'Priest', color: '#ffffff'});
+	player_classes.insert({name: 'Neutral', color: '#baa38d'});
 	
-	sets.insert({name: 'Basic'});
-	sets.insert({name: 'Classic'});
-	sets.insert({name: 'Curse of Naxxramas'});
-	sets.insert({name: 'Goblins vs Gnomes'});
-	sets.insert({name: 'Blackrock Mountain'});
-	sets.insert({name: 'Promotion'});
-	sets.insert({name: 'Reward'});
+	var basicID = sets.insert({name: 'Basic'});
+	var classicID = sets.insert({name: 'Classic'});
+	var naxxID = sets.insert({name: 'Curse of Naxxramas'});
+	var gvgID = sets.insert({name: 'Goblins vs Gnomes'});
+	var brmID = sets.insert({name: 'Blackrock Mountain'});
+	var promID = sets.insert({name: 'Promotion'});
+	var rewardID = sets.insert({name: 'Reward'});
 	
 	mechanics.insert({name: 'Charge'});
 	mechanics.insert({name: 'Taunt'});
@@ -136,6 +138,12 @@ Meteor.startup(function ()
 			card_entry.attack = card.attack;
 			card_entry.health = card.health;
 			card_entry.durability = card.durability;
+			
+			
+			// [naxxID, brmID, basicID, rewardID]
+			// if (card_entry.setID === naxxID || card_entry.setID === brmID || card_entry.setID === basicID || card_entry.setID === rewardID)
+			
+		
 			card_entry.rating = 0;
 			card_entry.rate_count = 0;
 			
@@ -143,3 +151,4 @@ Meteor.startup(function ()
 		}
 	}
 });
+*/

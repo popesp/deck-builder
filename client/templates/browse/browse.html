@@ -1,0 +1,18 @@
+<template name="browse">
+	<h1>You are browsing decks.</h1>
+	
+	<div class="row">
+		{{#each decks}}
+			<div class="col-md-2">
+				<a href="/browse/{{_id}}">
+					<div class="deck-browse">
+						<h3 style="color:{{class_color}}">{{name}}</h3>
+						By: {{deck_author}}
+						<br>
+						Class: {{deck_class}}
+					</div>
+				</a>
+			</div>
+		{{/each}}
+	</div>
+</template>

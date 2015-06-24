@@ -29,9 +29,9 @@ Template.card.helpers
 		return true;
 	},
 	
-	rarityName: function()
+	rarity_color: function()
 	{
-		return rarities.findOne(this.rarityID).name
+		return rarities.findOne(this.rarityID).color;
 	},
 	
 	hasRated: function()
@@ -52,6 +52,21 @@ Template.card.helpers
 		for (i in user_ratings)
 			if (user_ratings[i].cardID === this._id)
 				return user_ratings[i].rating;
+	},
+	
+	card_image: function()
+	{
+		return this.name.replace(/ /g, '_').replace(/:/g, '_').toLowerCase() + '.png';
+	},
+	
+	class_color: function()
+	{
+		return player_classes.findOne(this.player_classID).color;
+	},
+	
+	class_name: function()
+	{
+		return player_classes.findOne(this.player_classID).name;
 	}
 });
 

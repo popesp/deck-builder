@@ -61,9 +61,9 @@ Template.cards.helpers
 			}
 		}
 		
-		instance.card_count.set(cards_sorted.find(query).count());
+		instance.card_count.set(cards_by_name.find(query).count());
 		
-		return cards_sorted.find(query, {limit: CARDPAGE_LIMIT_DB, skip: instance.card_skip.get()});
+		return cards_by_name.find(query, {limit: CARDPAGE_LIMIT_DB, skip: instance.card_skip.get()});
 	},
 	
 	cardCount: function()
@@ -109,7 +109,7 @@ Template.cards.helpers
 	
 	card_image: function()
 	{
-		return this.name.replace(/ /g, '_').toLowerCase() + '.png';
+		return this.name.replace(/ /g, '_').replace(/:/g, '_').toLowerCase() + '.png';
 	}
 });
 

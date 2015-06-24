@@ -26,13 +26,57 @@ Router.route('/build',
 	}
 );
 
-// Browse Decks
-Router.route('/decks',
+// Deck builder
+Router.route('/build/:name',
 	{
-		name: 'decks',
+		name: 'deck_builder',
 		action: function()
 		{
-			this.render("decks");
+			this.render("deck_builder",
+			{
+				data: function()
+				{
+					return player_classes.findOne({name: this.params.name});
+				}
+			});
+		}
+	}
+);
+
+// Edit deck
+Router.route('/edit',
+	{
+		name: 'edit',
+		action: function()
+		{
+			this.render('edit');
+		}
+	}
+);
+
+// Browse Decks
+Router.route('/browse',
+	{
+		name: 'browse',
+		action: function()
+		{
+			this.render("browse");
+		}
+	}
+);
+
+Router.route('/browse/:id',
+	{
+		name: 'view_deck',
+		action: function()
+		{
+			this.render('deck_viewer',
+			{
+				data: function()
+				{
+					return decks_incomplete.findOne(this.params.id);
+				}
+			});
 		}
 	}
 );
@@ -68,24 +112,7 @@ Router.route('/card/:id',
 			{
 				data: function()
 				{
-					return cards.findOne({_id: this.params.id});
-				}
-			});
-		}
-	}
-);
-
-// Deck builder
-Router.route('/build/:name',
-	{
-		name: 'deck_builder',
-		action: function()
-		{
-			this.render("deck_builder",
-			{
-				data: function()
-				{
-					return player_classes.findOne({name: this.params.name});
+					return cards.findOne(this.params.id);
 				}
 			});
 		}

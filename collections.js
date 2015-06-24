@@ -19,6 +19,19 @@ schemas.rarity = new SimpleSchema
 	{
 		type: String,
 		label: 'Name'
+	},
+	
+	dust:
+	{
+		type: Number,
+		label: 'Dust Cost',
+		min: 0
+	},
+	
+	color:
+	{
+		type: String,
+		label: 'Color'
 	}
 });
 
@@ -47,6 +60,12 @@ schemas.player_class = new SimpleSchema
 	{
 		type: String,
 		label: 'Name'
+	},
+	
+	color:
+	{
+		type: String,
+		label: 'Color'
 	}
 });
 player_classes = new Mongo.Collection('player_classes');
@@ -181,7 +200,7 @@ schemas.card = new SimpleSchema
 	durability:
 	{
 		type: Number,
-		label: "Durability",
+		label: 'Durability',
 		min: 1,
 		optional: true
 	},
@@ -288,6 +307,12 @@ schemas.deck_incomplete = new SimpleSchema
 		label: 'Card List',
 		maxCount: 30,
 		regEx: SimpleSchema.RegEx.Id
+	},
+	
+	time_stamp:
+	{
+		type: Date,
+		label: "Time Stamp"
 	}
 });
 
@@ -342,6 +367,12 @@ schemas.deck_complete = new SimpleSchema
 		type: Number,
 		label: "Rate Count",
 		min: 0
+	},
+	
+	time_stamp:
+	{
+		type: Date,
+		label: "Time Stamp"
 	}
 });
 

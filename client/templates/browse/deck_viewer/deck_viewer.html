@@ -1,0 +1,12 @@
+<template name="deck_viewer">
+	Created on: {{time_to_date}}
+	<h1>{{name}}</h1>
+	{{#each cards}}
+		<p>
+		{{#with card_by_id}}
+			{{> card_text}}
+		{{/with}}
+		&times; {{count}}
+		</p>
+	{{/each}}
+</template>

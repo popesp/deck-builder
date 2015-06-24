@@ -49,3 +49,14 @@ Meteor.publish('filter_types', function()
 {
 	return filter_types.find({});
 });
+
+
+Meteor.publish('decks_incomplete', function()
+{
+	return decks_incomplete.find({});
+});
+
+Meteor.publish('decks_complete', function()
+{
+	return decks_complete.find({});
+});

@@ -1,57 +1,62 @@
 <template name="card">
-	<h1 class="card-rarity-{{rarityName}}">{{name}}</h1>
-	
-	<div class="container-fluid">{{{text}}}</div>
-	
-	<div class="container-fluid">
-		Cost: {{cost}}
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-3">
+			<img src="../imgs/{{card_image}}">
+		</div>
 		
-		{{#if isMinion}}
-			Attack: {{attack}}
-			Health: {{health}}
-			
-			{{#if hasRace}}
+		<div class="col-md-3">
+			<div class="card-stats">
+				<h1 style="color:{{rarity_color}}">{{name}}</h1>
+				<p>{{{text}}}</p>
+				<p>{{{flavor}}}</p>
+				
+				<p>
+					Class: <span style="color:{{class_color}}">{{class_name}}</span><br>
+					Cost: {{cost}}<br>
+					Artist: {{artist}}
+				</p>
+				
+				<div class="container-fluid">
+					{{#if isMinion}}
+						Attack: {{attack}}
+						Health: {{health}}
+						
+						{{#if hasRace}}
+							<br>
+							Race: {{race}}
+						{{/if}}
+					{{/if}}
+					
+					{{#if isWeapon}}
+						Attack: {{attack}}
+						Durability: {{durability}}
+					{{/if}}
+					
+				</div>
+				
+				<span style="font-size: 18px">Rating: {{ratingFormat}}</span>
+				
 				<br>
-				Race: {{race}}
-			{{/if}}
-		{{/if}}
+				
+				This card has been rated {{rate_count}} times.
+				
+				<br>
+				
+				{{#each ratings}}
+					{{> card_rating_btn}}
+				{{/each}}
+				
+				<br>
+				
+				{{#if hasRated}}
+					You have rated this card {{user_rating}}.
+				{{/if}}
+			</div>
+		</div>
 		
-		{{#if isWeapon}}
-			Attack: {{attack}}
-			Durability: {{durability}}
-		{{/if}}
-		
-		<br>
-		
-		Player Class: {{playerClass}}
-		
-		<br>
-		
-		Flavor Text: {{flavor}}
-		
-		<br>
-		
-		Artist:  {{artist}}
+		<div class="col-md-3"></div>
 	</div>
-	
-	<span style="font-size: 18px">Rating: {{ratingFormat}}</span>
-	
-	<br>
-	
-	This card has been rated {{rate_count}} times.
-	
-	<br>
-	
-	{{#each ratings}}
-		{{> card_rating_btn}}
-	{{/each}}
-	
-	<br>
-	
-	{{#if hasRated}}
-		You have rated this card {{user_rating}}.
-	{{/if}}
-	
 </template>
 
 <template name="card_rating_btn">

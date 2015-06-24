@@ -60,62 +60,6 @@ h1,h2,h3,h4,h5,h6
 
 
 
-/* --- header --- */
-.header
-{
-	background-color: rgba(40,40,40,.95);
-	border-radius: 5px;
-	
-	z-index: 1000;
-}
-
-.header-brand
-{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.header-nav > li
-{
-	display: inline-block;
-}
-
-.header-nav > li > a
-{
-	padding: 10px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #fff;
-	color: rgba(255,255,255,.75);
-	border-bottom: 2px solid transparent;
-}
-
-.header-nav > li > a:hover,.header-nav > li > a:focus
-{
-	background-color: transparent;
-	border-bottom-color: #a9a9a9;
-	border-bottom-color: rgba(255,255,255,.25);
-}
-
-.header-nav > .active > a,.header-nav > .active > a:hover,.header-nav > .active > a:focus
-{
-	color: #fff;
-	border-bottom-color: #fff;
-}
-
-@media (min-width: 768px)
-{
-	.header-brand
-	{
-		float: left;
-	}
-
-	.header-nav
-	{
-		float: right;
-	}
-}
-
 
 
 /* --- font --- */
@@ -129,7 +73,7 @@ h1,h2,h3,h4,h5,h6
 /* --- cover --- */
 .cover
 {
-	padding: 50px 20px;
+	padding: 50px 0;
 }
 .cover .btn-lg
 {
@@ -176,14 +120,6 @@ h1,h2,h3,h4,h5,h6
 	.header,.footer,.cover-container
 	{
 		width: 100%;
-	}
-}
-
-@media (min-width: 1024px)
-{
-	.header,.footer,.cover-container
-	{
-		width: 1024px;
 	}
 }
 
@@ -243,21 +179,6 @@ h1,h2,h3,h4,h5,h6
 	border-radius: 5px;
 	
 	display: inline-block;
-}
-
-.card-rarity-Rare
-{
-	color: #198eff;
-}
-
-.card-rarity-Epic
-{
-	color: #ab48ee;
-}
-
-.card-rarity-Legendary
-{
-	color: #f07000;
 }
 
 .card-mana
@@ -320,11 +241,57 @@ h1,h2,h3,h4,h5,h6
 	border-radius: 5px;
 }
 
+.deckbuilder-card
+{
+	height: 280px;
+	
+	margin: -5px;
+	
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.deckbuilder-scroll
+{
+	height: 100%;
+	vertical-align: middle;
+	font-size: 48px;
+}
+
+.deckbuilder-cardlist
+{
+	padding-bottom: 20px;
+	background-color: #202020;
+	
+	border-radius: 5px;
+	
+	height: 560px;
+}
+
+.deckbuilder-pagecount
+{
+	display: block;
+	
+	padding: 5px;
+	
+	font-family: title-font;
+	font-size: 20px;
+	
+	width: 150px;
+	
+	background-color: #202020;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
 .deck-entry
 {
 	background-color: #202020;
 	
-	padding: 5px 10px;
+	font-size: 14px;
+	
+	padding: 5px 0 5px 10px;
 	margin: 4px 0;
 	
 	text-align: left;
@@ -332,15 +299,35 @@ h1,h2,h3,h4,h5,h6
 	border-radius: 5px;
 }
 
-.deck-entry-count
+.deck-entry-cost
 {
 	display: inline-block;
 	
-	padding: 0 8px;
-	margin-right: 10px;
+	background-color: #3050d0;
+	padding: 2px 5px 0 6px;
+	
+	border-radius: 6px;
 	
 	font-family: title-font;
-	font-size: 18px;
+	font-weight: bold;
+	
+	margin-right: 10px;
+}
+
+.deck-name
+{
+	color: #000;
+}
+
+.deck-entry-count
+{
+	display: block;
+	float: right;
+	
+	padding: 0 8px;
+	
+	font-family: title-font;
+	font-size: 16px;
 	
 	border-radius: 5px;
 	
@@ -350,4 +337,29 @@ h1,h2,h3,h4,h5,h6
 .deck-counter
 {
 	
+}
+
+.card-stats
+{
+	text-align: left;
+	margin-top: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card-list-image
+{
+	margin: -15px 0;
 }

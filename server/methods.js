@@ -40,5 +40,19 @@ Meteor.methods
 			
 			cards.update(cardID, {$set: {rating: new_rating, rate_count: new_count}});
 		}
+	},
+	
+	insertDeck: function(deck)
+	{
+		if (!Meteor.userId())
+		{
+			// user needs to be logged in
+		} else
+		{
+			// deck validation goes here
+			
+			
+			return decks_incomplete.insert(deck);
+		}
 	}
 });

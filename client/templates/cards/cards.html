@@ -35,25 +35,13 @@
 		</div>
 	</div>
 	
-	<div class="row">
+	<ul class="list-inline">
 		{{#each cards}}
-		<div class="col-md-3">
-			<a href="/card/{{_id}}"><img width="95%" src="imgs/{{card_image}}"></a>
-		</div>
-			<!--
-			<div class="col-md-3">
-				<div class="card">
-					<div class="card-mana">{{cost}}</div>
-					<a href="/card/{{_id}}"><h3 class="card-rarity-{{rarityName}}">{{name}}</h3></a>
-					
-					<p>{{{text}}}</p>
-					<p>Set: {{setName}}</p>
-					<p>{{rarityName}}</p>
-				</div>
-			</div>
-			-->
+			<li class="card-list-image">
+				<a href="/card/{{_id}}"><img width="200" src="imgs/{{card_image}}"></a>
+			</li>
 		{{/each}}
-	</div>
+	</ul>
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -76,18 +64,6 @@
 					<div class="card-filter-checkbox"><input type="checkbox"> {{name}}</div>
 				{{/each}}
 			</div>
-			<!--
-			{{> Template.dynamic template="card_filter_{{type}}"}}
-			{{#if type_text}}
-				<div class="text-left">
-					{{#each options}}
-						<div class="card-filter-checkbox"><input type="checkbox"> {{this}}</div>
-					{{/each}}
-				</div>
-			{{/if}}
-			{{#if type_numeric}}
-			{{/if}}
-			-->
 		</div>
 	</div>
 </template>

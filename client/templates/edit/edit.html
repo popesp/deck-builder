@@ -1,0 +1,18 @@
+<template name="edit">
+	{{#if editing}}
+	<h2>Deck Currently In Progress:</h2>	
+	<br>
+	
+
+		<a href="/build/{{active_class_name}}">{{active_name}}</a>
+	{{/if}}
+	
+
+
+	<h1>Choose a deck to edit!</h1>
+	
+	
+	{{#each decks}}
+		<a href="../build/{{class_name}}" style="color:{{class_color}}" class="edit-deck">{{name}}</a><br>
+	{{/each}}
+</template>
