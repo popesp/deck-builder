@@ -15,10 +15,17 @@ cards_by_cost = new Mongo.Collection(null);
 
 card_filters = new Mongo.Collection(null);
 
-active_deck = {	active: new ReactiveVar(false),
-				dupID: null,
-				player_classID: null,
-				name: new ReactiveVar(""),
-				description: null,
-				cards: null
-				};
+try
+{
+	active_deck;
+}
+catch (ReferenceError)
+{
+	active_deck = {	active: new ReactiveVar(false),
+					dupID: null,
+					player_classID: null,
+					name: new ReactiveVar(""),
+					description: null,
+					cards: new ReactiveArray()
+					};
+}

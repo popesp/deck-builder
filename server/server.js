@@ -32,14 +32,14 @@ Meteor.startup(function ()
 	races.insert({name: 'Demon'});
 	races.insert({name: 'Dragon'});
 
-	player_classes.insert({name: 'Hunter', color: '#006600'});
-	player_classes.insert({name: 'Warlock', color: '#5c0099'});
+	player_classes.insert({name: 'Hunter', color: '#4D944D'});
+	player_classes.insert({name: 'Warlock', color: '#8D4DB8'});
 	player_classes.insert({name: 'Mage', color: '#85c2ff'});
 	player_classes.insert({name: 'Rogue', color: '#999999'});
-	player_classes.insert({name: 'Paladin', color: '#ffcc00'});
-	player_classes.insert({name: 'Druid', color: '#754719'});
-	player_classes.insert({name: 'Shaman', color: '#003399'});
-	player_classes.insert({name: 'Warrior', color: '#800000'});
+	player_classes.insert({name: 'Paladin', color: '#FFDB4D'});
+	player_classes.insert({name: 'Druid', color: '#916C47'});
+	player_classes.insert({name: 'Shaman', color: '#456AB4'});
+	player_classes.insert({name: 'Warrior', color: '#A34747'});
 	player_classes.insert({name: 'Priest', color: '#ffffff'});
 	player_classes.insert({name: 'Neutral', color: '#baa38d'});
 	

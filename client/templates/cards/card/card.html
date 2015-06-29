@@ -7,33 +7,15 @@
 		
 		<div class="col-md-3">
 			<div class="card-stats">
-				<h1 style="color:{{rarity_color}}">{{name}}</h1>
+				<h1 style="color:{{card_rarity_color}}">{{name}}</h1>
 				<p>{{{text}}}</p>
 				<p>{{{flavor}}}</p>
 				
 				<p>
-					Class: <span style="color:{{class_color}}">{{class_name}}</span><br>
+					Class: <span style="color:{{card_class_color}}">{{card_class_name}}</span><br>
 					Cost: {{cost}}<br>
 					Artist: {{artist}}
 				</p>
-				
-				<div class="container-fluid">
-					{{#if isMinion}}
-						Attack: {{attack}}
-						Health: {{health}}
-						
-						{{#if hasRace}}
-							<br>
-							Race: {{race}}
-						{{/if}}
-					{{/if}}
-					
-					{{#if isWeapon}}
-						Attack: {{attack}}
-						Durability: {{durability}}
-					{{/if}}
-					
-				</div>
 				
 				<span style="font-size: 18px">Rating: {{ratingFormat}}</span>
 				

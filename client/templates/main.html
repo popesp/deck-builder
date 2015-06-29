@@ -1,12 +1,6 @@
 <template name="main">
-	<div class="site-wrapper">
-		<div class="site-wrapper-inner">
-			<div class="cover-container">
-				{{> header}}
-				<div class="inner cover">
-					{{> yield}}
-				</div>
-			</div>
-		</div>
+	{{> header}}
+	<div class="main-container">
+		{{> yield}}
 	</div>
 </template>

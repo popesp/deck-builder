@@ -1,0 +1,248 @@
+@import 'colors.import.less';
+@import 'format.import.less';
+
+
+@builder-card-height:				280px;
+@builder-cardlist-scrollbtn-size:	72px;
+
+@builder-cardlist-height:			@builder-card-height * 2;
+
+
+.builder-sidebar
+{
+	background-color: @grey-darkest;
+	
+	border-radius: @br;
+}
+
+.builder-card
+{
+	height: @builder-card-height;
+	
+	margin: -8px;
+	
+	background-size: 110%;
+	background-position: center;
+	background-repeat: no-repeat;
+	
+	opacity: 0.3;
+	
+	transition: opacity 0.6s;
+	transition: background-size 0.1s;
+}
+
+.builder-card.builder-addable:active
+{
+	background-size: 105%;
+}
+
+.builder-cardcount
+{
+	position: relative;
+	
+	top: 26px;
+	
+	width: 40px;
+	
+	float: right;
+	
+	font-family: header-font;
+	font-size: 24px;
+	
+	background-color: rgba(20, 20, 20, .9);
+	border-radius: @br;
+	
+	border: 2px solid @white;
+	
+	z-index: 1000;
+}
+
+.builder-cardcount > h3
+{
+	margin: 0;
+}
+
+.builder-addable
+{
+	opacity: 1;
+}
+
+
+
+#builder-tabs
+{
+	border: none;
+}
+
+.builder-tab
+{
+	background-color: @grey-darker;
+	
+	border: none!important;
+	
+	border-top-right-radius: @br!important;
+	border-top-left-radius: @br!important;
+}
+
+.builder-tab:focus
+{
+	background-color: @grey-darker!important;
+}
+
+.builder-tab:hover
+{
+	background-color: @grey-darkest!important;
+	border: none!important;
+}
+
+.builder-tab-active
+{
+	background-color: @grey-darkest;
+	cursor: default;
+}
+
+.builder-tab-active:focus
+{
+	background-color: @grey-darkest!important;
+}
+
+
+
+
+.deckbuilder-scroll
+{
+	height: @builder-cardlist-height;
+	font-size: @builder-cardlist-scrollbtn-size;
+}
+
+.deckbuilder-scroll > .glyphicon
+{
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+	
+	transition: text-shadow 0.4s;
+}
+
+.scroll-right > .glyphicon
+{
+	left: 0;
+}
+
+.scroll-left > .glyphicon
+{
+	right: 0;
+}
+
+.deckbuilder-scroll > .glyphicon:hover
+{
+	text-shadow: 0 0 0.2em @white, 0 0 0.2em @white
+}
+
+
+
+
+
+.deckbuilder-cardlist
+{
+	padding-bottom: 20px;
+	background-color: @grey-darkest;
+	
+	border-radius: @br;
+	
+	height: @builder-cardlist-height;
+}
+
+.deckbuilder-pagecount
+{
+	margin: 0 0 0 auto;
+	padding: 5px;
+	
+	width: 200px;
+	
+	background-color: @grey-darkest;
+	border-bottom-right-radius: @br;
+	border-bottom-left-radius: @br;
+}
+
+.deck-entry
+{
+	background-position: -800% 35%;
+	background-repeat: no-repeat;
+	
+	font-size: 14px;
+	
+	padding: 5px 0 5px 10px;
+	margin: 4px 0;
+	
+	text-align: left;
+	
+	border-radius: @br;
+}
+
+.deck-entry-cost
+{
+	display: inline-block;
+	
+	background-color: #3050d0;
+	padding: 2px 5px 0 6px;
+	
+	border-radius: 6px;
+	
+	font-weight: bold;
+	
+	margin: 0 10px 0 0;
+}
+
+.deck-name
+{
+	color: #000;
+}
+
+.deck-entry-count
+{
+	display: block;
+	float: right;
+	
+	background-color: rgba(20, 20, 20, 0.9);
+	border: 1px solid @white;
+	
+	border-radius: 4px;
+	padding: 2px;
+	
+	margin: 0px 4px;
+}
+
+.deck-counter
+{
+	
+}
+
+.card-stats
+{
+	text-align: left;
+	margin-top: 100px;
+}
+
+
+.alert-danger
+{
+	background-color: yellow;
+	color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.card-list-image
+{
+	margin: -15px 0;
+}

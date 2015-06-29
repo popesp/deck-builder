@@ -9,4 +9,15 @@
 		&times; {{count}}
 		</p>
 	{{/each}}
+	
+	<div class="row"> 
+		<div class="col-md-6">
+		{{> highchartsHelper chartId="cardType" chartWidth="100%" charHeight="100%" chartObject=cardTypeChart}}
+		</div>
+		
+		<div class="col-md-6">
+		{{> highchartsHelper chartId="manaCost" chartWidth="100%" charHeight="100%" chartObject=cardManaCost}}
+		</div>
+		
+	</div>
 </template>

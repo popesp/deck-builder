@@ -1,20 +1,26 @@
 <template name="deck_builder">
 	<div class="row>">
 		<div class="col-md-9">
-			<a href="#"><div class="deckbuilder-save">Save Deck</div></a>
-			<a href="#"><div class="deckbuilder-load">Load Deck</div></a>
+			<a href="#"><div class="btn btn-default deckbuilder-save">Save Deck</div></a>
 			<div class="col-md-1 deckbuilder-scroll scroll-left"><a href="#" class="glyphicon glyphicon-chevron-left"></a></div>
 			<div class="col-md-10">
+				<ul id="builder-tabs" class="nav nav-tabs" role="tablist">
+					<li><a href="#" role="tab" class="builder-tab builder-tab-class{{#if class_active}} builder-tab-active{{/if}}">{{name}}</a></li>
+					<li><a href="#" role="tab" class="builder-tab builder-tab-neutral{{#if class_active}}{{else}} builder-tab-active{{/if}}">Neutral</a></li>
+				</ul>
 				<div class="row deckbuilder-cardlist">
 					{{#each cards}}
 						<div class="col-md-3">
 							<a href="#">
-								<div class="deckbuilder-card" style='background-image: url("../imgs/{{card_image}}")'></div>
+								{{#if exists}}
+									<div class="builder-cardcount"><h3>&times;{{deck_count}}</h3></div>
+								{{/if}}
+								<div class="builder-card{{#if addable}} builder-addable{{/if}}" style='background-image: url("../imgs/{{card_image}}");'></div>
 							</a>
 						</div>
 					{{/each}}
 				</div>
-				<div class="deckbuilder-pagecount">Page {{page_number}} of {{page_count}}</div>
+				<h4 class="deckbuilder-pagecount">Page {{page_number}} of {{page_count}}</h4>
 			</div>
 			<div class="col-md-1 deckbuilder-scroll scroll-right"><a href="#" class="glyphicon glyphicon-chevron-right"></a></div>
 			<div class="col-md-12">
@@ -23,21 +29,25 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 deckbuilder-sidebar">
+		<div class="col-md-3 builder-sidebar">
 			<h2> Current Deck </h2>
 			<div class="deck-counter">{{deck_counter}} / 30</div>
 			<div class="deck-dust">Total dust cost: {{deck_dust}}</div>
 			{{#each deck_entries}}
 				<a href="#">
-					<div class="deck-entry">
-						<div class="deck-entry-cost">{{cost}}</div>
-						{{#with card}}
-							{{> card_text}}
-						{{/with}}
-						<div class="deck-entry-count">x{{count}}</div>
-					</div>
+					{{#with card}}
+						{{> deck_entry}}
+					{{/with}}
 				</a>
 			{{/each}}
 		</div>
 	</div>	
+</template>
+
+<template name="deck_entry">
+	<div class="deck-entry" style='background-image: linear-gradient(to right, rgba(40, 40, 40, 1), rgba(40, 40, 40, 1), rgba(40, 40, 40, 0)), url("../imgs/{{card_image}}")'>
+		<h5 class="deck-entry-cost">{{cost}}</h5>
+		{{> card_text}}
+		<h5 class="deck-entry-count">x{{../count}}</h5>
+	</div>
 </template>

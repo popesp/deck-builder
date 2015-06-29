@@ -95,21 +95,6 @@ Template.cards.helpers
 			numbers.push(i + 1);
 		
 		return numbers;
-	},
-	
-	setName: function()
-	{
-		return sets.findOne(this.setID).name;
-	},
-	
-	rarityName: function()
-	{
-		return rarities.findOne(this.rarityID).name;
-	},
-	
-	card_image: function()
-	{
-		return this.name.replace(/ /g, '_').replace(/:/g, '_').toLowerCase() + '.png';
 	}
 });
 

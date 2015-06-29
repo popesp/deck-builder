@@ -1,13 +1,24 @@
 Template.deck_builder.onCreated(function()
 {
-	this.class_cards = new ReactiveVar(0);
-	this.neutral_cards = new ReactiveVar(0);
+	this.cardcount_class = new ReactiveVar(0);
+	this.cardcount_neutral = new ReactiveVar(0);
 	
-	this.class_page_count = new ReactiveVar(0);
-	this.neutral_page_count = new ReactiveVar(0);
+	this.pagecount_class = new ReactiveVar(0);
+	this.pagecount_neutral = new ReactiveVar(0);
 	
 	this.card_skip = new ReactiveVar(0);
 	this.card_page_num = new ReactiveVar(1);
+	
+	this.autorun(function()
+	{
+		var instance = Template.instance();
+		var page_num = instance.card_page_num.get();
+		
+		if (page_num > instance.pagecount_class.get())
+			page_num -= instance.pagecount_class.get();
+		
+		instance.card_skip.set((page_num - 1) * CARDPAGE_LIMIT_BUILDER);
+	});
 });
 
 Template.deck_builder.helpers
@@ -25,62 +36,27 @@ Template.deck_builder.helpers
 	cards: function()
 	{
 		var instance = Template.instance();
+		
+		// NOTE: fixes weird bug where data is null on first helper call
+		if (instance.data === null)
+			return;
+		
 		var class_query = {$and: [{player_classID: instance.data._id}]};
 		var neutral_query = {$and: [{player_classID: player_classes.findOne({name: 'Neutral'})._id}]};
 		
-		/*
-		for (i in card_filters_array)
-		{
-			var cf = card_filters_array[i];
-			var filter = filters.findOne(cf.filterID);
-			var ftype = filter_types.findOne(filter.typeID);
-			
-			if (ftype.name === 'singular')
-			{
-				if (cf.options.length > 0)
-				{
-					var options_in = {};
-					
-					options_in[filters.findOne(cf.filterID).card_field] = {$in: cf.options}
-					query.$and.push(options_in);
-				}
-			} else if (ftype.name === 'multiple')
-			{
-				if (cf.options.length > 0)
-				{
-					var options_in = {};
-					
-					options_in[filters.findOne(cf.filterID).card_field] = {$in: cf.options}
-					query.$and.push(options_in);
-				}
-			} else if (ftype.name === 'numeric')
-			{
-				
-			}
-		}
-		*/
+		var cardcount_class = cards.find(class_query).count();
+		var cardcount_neutral = cards.find(neutral_query).count();
 		
-		if (instance.data !== null)
-		{
-			var class_cards = cards_by_cost.find(class_query).count();
-			var neutral_cards = cards_by_cost.find(neutral_query).count();
-			
-			instance.class_cards.set(class_cards);
-			instance.neutral_cards.set(neutral_cards);
-			
-			instance.class_page_count.set(Math.floor((class_cards - 1) / CARDPAGE_LIMIT_BUILDER) + 1);
-			instance.neutral_page_count.set(Math.floor((neutral_cards - 1) / CARDPAGE_LIMIT_BUILDER) + 1);
-		}
+		instance.cardcount_class.set(cardcount_class);
+		instance.cardcount_neutral.set(cardcount_neutral);
 		
-		if (instance.card_page_num.get() <= instance.class_page_count.get())
+		instance.pagecount_class.set(Math.floor((cardcount_class - 1) / CARDPAGE_LIMIT_BUILDER) + 1);
+		instance.pagecount_neutral.set(Math.floor((cardcount_neutral - 1) / CARDPAGE_LIMIT_BUILDER) + 1);
+		
+		if (instance.card_page_num.get() <= instance.pagecount_class.get())
 			return cards_by_cost.find(class_query, {limit: CARDPAGE_LIMIT_BUILDER, skip: instance.card_skip.get()});
 		else
 			return cards_by_cost.find(neutral_query, {limit: CARDPAGE_LIMIT_BUILDER, skip: instance.card_skip.get()});
-	},
-	
-	card_image: function()
-	{
-		return this.name.replace(/ /g, '_').replace(/:/g, '_').toLowerCase() + '.png';
 	},
 	
 	deck_entries: function()
@@ -108,20 +84,20 @@ Template.deck_builder.helpers
 	{
 		var instance = Template.instance();
 		
-		if (instance.card_page_num.get() <= instance.class_page_count.get())
-			return Template.instance().class_page_count.get();
+		if (instance.card_page_num.get() <= instance.pagecount_class.get())
+			return Template.instance().pagecount_class.get();
 		else
-			return Template.instance().neutral_page_count.get();
+			return Template.instance().pagecount_neutral.get();
 	},
 	
 	page_number: function()
 	{
 		var instance = Template.instance();
 		
-		if (instance.card_page_num.get() <= instance.class_page_count.get())
+		if (instance.card_page_num.get() <= instance.pagecount_class.get())
 			return instance.card_page_num.get();
 		else
-			return instance.card_page_num.get() - instance.class_page_count.get();
+			return instance.card_page_num.get() - instance.pagecount_class.get();
 	},
 	
 	rarity_color: function()
@@ -154,8 +130,65 @@ Template.deck_builder.helpers
 	card: function()
 	{
 		return cards_by_cost.findOne(this.cardID);
-
+	},
+	
+	addable: function()
+	{
+		var deck_list = active_deck.cards.array();
 		
+		for (var i in deck_list)
+		{
+			if (deck_list[i].cardID === this._id)
+			{
+				var legID = rarities.findOne({name: 'Legendary'})._id;
+				
+				if (this.rarityID === legID)
+					return false;
+				
+				if (deck_list[i].count > 1)
+					return false;
+				
+				break;
+			}
+		}
+		
+		return true;
+	},
+	
+	exists: function()
+	{
+		var deck_list = active_deck.cards.array();
+		
+		for (var i in deck_list)
+		{
+			if (deck_list[i].cardID === this._id)
+				return true;
+		}
+		
+		return false;
+	},
+	
+	deck_count: function()
+	{
+		var deck_list = active_deck.cards.array();
+		
+		for (var i in deck_list)
+		{
+			if (deck_list[i].cardID === this._id)
+				return deck_list[i].count;
+		}
+		
+		return 0;
+	},
+	
+	class_active: function()
+	{
+		var instance = Template.instance();
+		
+		if (instance.card_page_num.get() <= instance.pagecount_class.get())
+			return true;
+		
+		return false;
 	}
 });
 
@@ -171,32 +204,18 @@ Template.deck_builder.events
 		var instance = Template.instance();
 		
 		if (instance.card_page_num.get() > 1)
-		{
 			instance.card_page_num.set(instance.card_page_num.get() - 1);
-			
-			if (instance.card_page_num.get() <= instance.class_page_count.get())
-				instance.card_skip.set((instance.card_page_num.get() - 1) * CARDPAGE_LIMIT_BUILDER);
-			else
-				instance.card_skip.set((instance.card_page_num.get() - 1 - instance.class_page_count.get()) * CARDPAGE_LIMIT_BUILDER);
-		}
 	},
 	
 	"click .scroll-right": function()
 	{
 		var instance = Template.instance();
 		
-		if (instance.card_page_num.get() < (instance.class_page_count.get() + instance.neutral_page_count.get()))
-		{
+		if (instance.card_page_num.get() < (instance.pagecount_class.get() + instance.pagecount_neutral.get()))
 			instance.card_page_num.set(instance.card_page_num.get() + 1);
-			
-			if (instance.card_page_num.get() <= instance.class_page_count.get())
-				instance.card_skip.set((instance.card_page_num.get() - 1) * CARDPAGE_LIMIT_BUILDER);
-			else
-				instance.card_skip.set((instance.card_page_num.get() - 1 - instance.class_page_count.get()) * CARDPAGE_LIMIT_BUILDER);
-		}
 	},
 	
-	"click .deckbuilder-card": function()
+	"click .builder-card.builder-addable": function()
 	{
 		var deck_list = active_deck.cards.list();
 		
@@ -230,27 +249,6 @@ Template.deck_builder.events
 		}
 	},
 	
-	"click .deck-entry": function()
-	{
-		var deck_list = active_deck.cards.list();
-		
-		if (this.count > 1)
-		{
-			this.count--;
-			
-			// trigger reactive callbacks
-			deck_list.push(null);
-			deck_list.pop();
-		} else
-		{
-			for (i in deck_list)
-			{
-				if (this.cardID === deck_list[i].cardID)
-					deck_list.splice(i, 1);
-			}
-		}
-	},
-	
 	"click .deckbuilder-save": function()
 	{
 		var deck_list = active_deck.cards.array();
@@ -278,5 +276,47 @@ Template.deck_builder.events
 	"keyup input.deck-name": function(event, template)
 	{
 		active_deck.name.set(template.find('.deck-name').value);
+	},
+	
+	"click .builder-tab-neutral": function()
+	{
+		var instance = Template.instance();
+		
+		if (instance.card_page_num.get() <= instance.pagecount_class.get())
+			instance.card_page_num.set(instance.pagecount_class.get() + 1);
+	},
+	
+	"click .builder-tab-class": function()
+	{
+		var instance = Template.instance();
+		
+		if (instance.card_page_num.get() > instance.pagecount_class.get())
+			instance.card_page_num.set(1);
+	}
+});
+
+
+Template.deck_entry.events
+({
+	"click .deck-entry": function()
+	{
+		var deck_list = active_deck.cards.list();
+		var data = Template.parentData();
+		
+		if (data.count > 1)
+		{
+			data.count--;
+			
+			// trigger reactive callbacks
+			deck_list.push(null);
+			deck_list.pop();
+		} else
+		{
+			for (i in deck_list)
+			{
+				if (data.cardID === deck_list[i].cardID)
+					deck_list.splice(i, 1);
+			}
+		}
 	}
 });

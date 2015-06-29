@@ -1,12 +1,24 @@
 <template name="header">
-	<div class="header clearfix">
-		<div class="inner">
-			<a href="/"><h3 class="header-brand">Deck Builder</h3></a>
+	<nav class="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Deck Builder</a>
+			</div>
 			
-			<input class="form-control typeahead card-search" name="card-search" type="text" data-highlight="true" placeholder="Search the card database..." autocomplete="off" spellcheck="off" data-value-key="name" data-source="getCards" data-selected="selected" data-template="card_suggestion"/>
-			
-			<nav>
-				<ul class="nav header-nav">
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input class="form-control typeahead" name="card-search" type="text" data-highlight="true" placeholder="Search the card database..." autocomplete="off" spellcheck="off" data-value-key="name" data-source="getCards" data-selected="selected" data-template="card_suggestion"/>
+					</div>
+				</form>
+				
+				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/build"><i class="fa fa-plus"></i> New Deck</a></li>
 					{{#if display_edit}}
 						<li><a href="/edit" data-toggle="tooltip" data-placement="bottom" title="{{#if active_deck}}Currently Editing: {{current_deck}}{{/if}}"><i class="fa fa-pencil"></i> Edit Deck</a></li>
@@ -15,9 +27,9 @@
 					<li><a href="/cards"><i class="fa fa-database"></i> Card DB</a></li>
 					{{> loginButtons}}
 				</ul>
-			</nav>
+			</div>
 		</div>
-	</div>
+	</nav>
 </template>
 
 <template name="card_suggestion">
