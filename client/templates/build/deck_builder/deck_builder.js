@@ -273,9 +273,9 @@ Template.deck_builder.events
 		);
 	},
 	
-	"keyup input.deck-name": function(event, template)
+	"keyup #builder-deckname > input": function(event, template)
 	{
-		active_deck.name.set(template.find('.deck-name').value);
+		active_deck.name.set(template.find('#builder-deckname > input').value);
 	},
 	
 	"click .builder-tab-neutral": function()

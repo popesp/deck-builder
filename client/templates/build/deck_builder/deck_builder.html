@@ -2,12 +2,16 @@
 	<div class="row>">
 		<div class="col-md-9">
 			<a href="#"><div class="btn btn-default deckbuilder-save">Save Deck</div></a>
-			<div class="col-md-1 deckbuilder-scroll scroll-left"><a href="#" class="glyphicon glyphicon-chevron-left"></a></div>
-			<div class="col-md-10">
+			
+			<div class="col-md-11 col-md-offset-1">
 				<ul id="builder-tabs" class="nav nav-tabs" role="tablist">
 					<li><a href="#" role="tab" class="builder-tab builder-tab-class{{#if class_active}} builder-tab-active{{/if}}">{{name}}</a></li>
 					<li><a href="#" role="tab" class="builder-tab builder-tab-neutral{{#if class_active}}{{else}} builder-tab-active{{/if}}">Neutral</a></li>
 				</ul>
+			</div>
+			
+			<div class="col-md-1 deckbuilder-scroll scroll-left"><a href="#" class="glyphicon glyphicon-chevron-left"></a></div>
+			<div class="col-md-10">
 				<div class="row deckbuilder-cardlist">
 					{{#each cards}}
 						<div class="col-md-3">
@@ -23,14 +27,9 @@
 				<h4 class="deckbuilder-pagecount">Page {{page_number}} of {{page_count}}</h4>
 			</div>
 			<div class="col-md-1 deckbuilder-scroll scroll-right"><a href="#" class="glyphicon glyphicon-chevron-right"></a></div>
-			<div class="col-md-12">
-				<div class="deckbuilder-attributes">
-					Name: <input type="text" class="deck-name" value="{{deck_name}}">
-				</div>
-			</div>
 		</div>
 		<div class="col-md-3 builder-sidebar">
-			<h2> Current Deck </h2>
+			<h3 id="builder-deckname"><input type="text" placeholder="Type a deck name" value="{{deck_name}}"></h3>
 			<div class="deck-counter">{{deck_counter}} / 30</div>
 			<div class="deck-dust">Total dust cost: {{deck_dust}}</div>
 			{{#each deck_entries}}
