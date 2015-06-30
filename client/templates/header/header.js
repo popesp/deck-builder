@@ -17,7 +17,7 @@ Template.header.helpers
 	
 	display_edit: function()
 	{
-		if (Meteor.user() && decks_incomplete.find({authorID: Meteor.userId()}).count() > 0)
+		if (Meteor.userId() && decks_private.find({authorID: Meteor.userId()}).count() > 0)
 			return true;
 		
 		return false;

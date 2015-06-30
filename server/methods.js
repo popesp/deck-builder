@@ -42,17 +42,36 @@ Meteor.methods
 		}
 	},
 	
-	insertDeck: function(deck)
+	addDeck: function(deck)
 	{
-		if (!Meteor.userId())
-		{
-			// user needs to be logged in
-		} else
-		{
-			// deck validation goes here
-			
-			
-			return decks_incomplete.insert(deck);
-		}
+		if (!this.userId)
+			throw new Meteor.Error('logged-out', 'You must be logged in to add a deck.');
+		
+		// deck validation goes here
+		
+		return decks_private.insert(deck);
+	},
+	
+	publishDeck: function(privateID)
+	{
+		if (!this.userId)
+			throw new Meteor.Error('logged-out', 'You must be logged in to publish a deck.');
+		
+		var deck = decks_private.findOne(privateID);
+		
+		if (deck === undefined)
+			throw new Meteor.Error('invalid-id', 'Could not find a deck with that identifier.');
+		
+		if (deck.authorID !== this.userId)
+			throw new Meteor.Error('invalid-id', 'Could not find a deck with that identifier.');
+		
+		if (deck.cards.length !== 30)
+			throw new Meteor.Error('invalid-data', 'Deck does not have 30 cards.');
+		
+		// add deck to complete collection
+		decks_public.insert(deck);
+		
+		// remove deck from incomplete collection
+		decks_private.remove(deck._id);
 	}
 });

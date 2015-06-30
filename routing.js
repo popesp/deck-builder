@@ -15,30 +15,35 @@ Router.route('/',
 	}
 );
 
-// Build Deck
-Router.route('/build',
+// New Deck
+Router.route('/new_deck',
 	{
-		name: 'build',
+		name: 'new_deck',
 		action: function()
 		{
-			this.render("build");
+			this.render('new_deck');
 		}
 	}
 );
 
 // Deck builder
-Router.route('/build/:name',
+Router.route('/builder',
 	{
-		name: 'deck_builder',
+		name: 'builder',
 		action: function()
 		{
-			this.render("deck_builder",
+			if (Meteor.userId() && Meteor.user().)
 			{
-				data: function()
+				Meteor.user().
+				this.render('builder',
 				{
-					return player_classes.findOne({name: this.params.name});
-				}
-			});
+					data: function()
+					{
+						return player_classes.findOne({name: this.params.name});
+					}
+				});
+			} else
+				this.redirect('/new_deck');
 		}
 	}
 );

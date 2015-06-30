@@ -1,3 +1,34 @@
+/* User --- */
+schemas.user = new SimpleSchema
+({
+	username:
+	{
+		type: String,
+		regEx: /^[a-sz0-9A-Z_]{3,15}$/
+	},
+	
+	createdAt:
+	{
+		type:Date
+	},
+	
+	roles:
+	{
+		type: [String],
+		optional: true
+	},
+	
+	active_deck:
+	{
+		type: String,
+		label: 'Active Deck',
+		
+	}
+});
+
+Meteor.users.attachSchema(schemas.user);
+
+
 /* --- Card Type --- */
 schemas.type = new SimpleSchema
 ({
@@ -277,8 +308,8 @@ filters.attachSchema(schemas.filter);
 
 
 
-/* --- Incomplete Deck --- */
-schemas.deck_incomplete = new SimpleSchema
+/* --- Private Deck --- */
+schemas.deck_private = new SimpleSchema
 ({
 	name:
 	{
@@ -309,19 +340,19 @@ schemas.deck_incomplete = new SimpleSchema
 		regEx: SimpleSchema.RegEx.Id
 	},
 	
-	time_stamp:
+	time_created:
 	{
 		type: Date,
-		label: "Time Stamp"
+		label: "Time Created"
 	}
 });
 
-decks_incomplete = new Mongo.Collection('decks_incomplete');
-decks_incomplete.attachSchema(schemas.deck_incomplete);
+decks_private = new Mongo.Collection('decks_private');
+decks_private.attachSchema(schemas.deck_private);
 
 
-/* --- Complete Deck --- */
-schemas.deck_complete = new SimpleSchema
+/* --- Public Deck --- */
+schemas.deck_public = new SimpleSchema
 ({
 	name:
 	{
@@ -376,5 +407,5 @@ schemas.deck_complete = new SimpleSchema
 	}
 });
 
-decks_complete = new Mongo.Collection('decks_complete');
-decks_complete.attachSchema(schemas.deck_complete);
+decks_public = new Mongo.Collection('decks_public');
+decks_public.attachSchema(schemas.deck_public);

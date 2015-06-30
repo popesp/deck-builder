@@ -145,8 +145,8 @@ Meteor.methods
 			}
 		}
 		
-		decks_incomplete.remove({});
-		decks_complete.remove({});
+		decks_private.remove({});
+		decks_public.remove({});
 	},
 	
 	resetDecks: function()
@@ -157,7 +157,7 @@ Meteor.methods
 		if (!Roles.userIsInRole(this.userId, ['administrator']))
 			throw new Meteor.Error(403, 'Access Denied');
 		
-		decks_incomplete.remove({});
-		decks_complete.remove({});
+		decks_private.remove({});
+		decks_public.remove({});
 	}
 });

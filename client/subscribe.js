@@ -24,5 +24,5 @@ Meteor.subscribe('mechanics');
 Meteor.subscribe('filters');
 Meteor.subscribe('filter_types');
 
-Meteor.subscribe('decks_incomplete');
-Meteor.subscribe('decks_complete');
+Meteor.subscribe('decks_private');
+Meteor.subscribe('decks_public');

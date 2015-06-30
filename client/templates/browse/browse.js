@@ -2,7 +2,7 @@ Template.browse.helpers
 ({
 	decks: function()
 	{
-		return decks_incomplete.find({}, {sort: {time_stamp: -1}});
+		return decks_private.find({}, {sort: {time_stamp: -1}});
 	},
 	
 	deck_author: function()
